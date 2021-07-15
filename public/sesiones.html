@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cuenta - Klimarios</title>
+    <link rel="stylesheet" href="./styles/style2.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="form-structor">
+        <form action="/register" method="post" id="formReg">
+            <div class="signup">
+                <h2 class="form-title" id="signup"><span>o</span>Registrate</h2>
+                <div class="form-holder">
+
+                    <input type="text" class="input" placeholder="username" name="username" id="input" />
+                    <input type="password" name="password" id="input" class="input" placeholder="Password">
+                </div>
+                <button class="submit-btn" type="submit">Registrate</button>
+            </div>
+        </form>
+
+
+
+        <div class="login slide-up">
+            <div class="center">
+                <h2 class="form-title" id="login"><span>o</span>Iniciar sesion</h2>
+                <div class="form-holder">
+                    <form action="/authenticate" method="post">
+                        <input type="text" class="input" placeholder="username" name="username" id="input" />
+                        <input type="password" name="password" id="password" class="input" placeholder="Password">
+                        <button class="submit-btn" type="submit">Iniciar sesion</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src="./jss/script.js"></script>
+
+</body>
+
+</html>

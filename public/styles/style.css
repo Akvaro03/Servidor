@@ -1,0 +1,160 @@
+  a {
+      text-decoration: none;
+      background-color: transparent;
+      color: white;
+      padding-top: 3px;
+      padding-bottom: 3px;
+  }
+  
+  a:hover {
+      color: white;
+  }
+  
+  a:not(a:hover, #icon) {
+      color: grey;
+  }
+  
+  nav div {
+      align-items: center;
+  }
+  
+  .site-header {
+      background: rgba(0, 0, 0, .85);
+  }
+  
+  .pb-1,
+  .py-1 {
+      padding-bottom: .25rem!important;
+  }
+  
+  .pt-1,
+  .py-1 {
+      padding-top: .25rem!important;
+  }
+  
+  .container22 {
+      width: 90%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 4fr;
+      padding-top: 50px;
+  }
+  
+  #ubicacion {
+      grid-row-start: 2;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      color: white;
+      font-size: 25px;
+  }
+  
+  .date {
+      grid-row-start: 3;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      color: whitesmoke;
+  }
+  
+  .p {
+      grid-row-start: 2;
+      grid-column-start: 1;
+      grid-column-end: 5;
+  }
+  
+  .container33 {
+      width: 90%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 4fr;
+  }
+  
+  .temperatura {
+      grid-column-start: 1;
+      display: flex;
+      align-items: center;
+      vertical-align: center;
+  }
+  
+  .temp11 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 80px;
+      position: relative;
+      float: left;
+      color: #E0FFFF;
+      width: 45%;
+      height: auto;
+  }
+  
+  .temp22 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 80px;
+      position: relative;
+      float: left;
+      width: 45%;
+      height: auto;
+  }
+  
+  .img {
+      float: left;
+      position: relative;
+      width: 50%;
+      height: auto;
+  }
+  
+  .estadoClima {
+      font-family: 'Oswald', sans-serif;
+      align-items: center;
+      vertical-align: center;
+  }
+  
+  .estado {
+      font-size: 40px;
+      display: flex;
+      height: 50px;
+      padding-top: 20px;
+  }
+  
+  .estadoDescrip {
+      padding-top: 20px;
+  }
+  
+  .container44 {
+      width: 90%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 25px;
+  }
+  
+  .dibujo {
+      float: left;
+      padding-left: 10px;
+      padding-right: 4px;
+  }
+  
+  .nombre {
+      margin: 0 8px 0 0;
+      background: 0.9;
+  }
+  
+  .humedad {
+      border-radius: 10px;
+      backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+  }
+  
+  .tarjeta-caract {
+      width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background-color: #fff;
+      border-radius: 10px;
+  }
+  
+  .tarjeta-caract__icono {
+      display: flex;
+      align-items: center;
+  }
