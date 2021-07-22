@@ -1,0 +1,37 @@
+body {
+    min-height: 100vh;
+    display: grid;
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
+    background-image: url("/img/fondOpciones.jpg");
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.content {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    background: white;
+    border-radius: 15px;
+}
+
+.signup {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+#nombre {
+    grid-column-start: 2;
+}
+
+#name {
+    grid-column-start: 2;
+    grid-row-start: 3;
+}

@@ -1,3 +1,4 @@
+process.traceDeprecation = true;
 const express = require('express');
 const path = require(`path`);
 const bcrypt = require(`bcrypt`)
@@ -5,6 +6,8 @@ const mongoose = require(`mongoose`)
 const app = express();
 const bodyParser = require(`body-parser`);
 const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`
+mongoose.set('useFindAndModify', false);
+
 const User = require(`./public/jss/user`);
 const port = process.env.PORT || 3000;
 

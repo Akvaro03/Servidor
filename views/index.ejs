@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../styles/style.css">
-
-</head>
-
 <%- include("template/cabezera") %>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    </head>
+
     <% if (hours >= 20 || hours <= 7 ) { %>
 
         <body class=" " style="background-image: url( '/img/fond2.jpg'); background-size: cover;">
@@ -20,7 +20,7 @@
                                     <a href="/cuenta" class="class=" a d-none d-md-inline-block ">Registrarse</a>
                                     <a href="/cuenta " class="class=" a d-none d-md-inline-block">Iniciar sesion</a>
                                     <%} else { %>
-                                        <a href="http://localhost:3000/cuenta" class="class=" a d-none d-md-inline-block "><%=nombre%></a>
+                                        <a href="http://localhost:3000/opciones" class="class=" a d-none d-md-inline-block "><%=nombre%></a>
                                         <a href="http://localhost:3000/cerrarSesion " class="class=" a d-none d-md-inline-block">Cerrar sesion</a>
                                         <% } %>
                             </div>
@@ -36,14 +36,18 @@
 
                                             <div class="container22 " id="hora ">
                                                 <% if (hours >= 20 || hours <= 7 ) {%>
-                                                    <h1 id="ubicacion " class="p " style="color: #E0FFFF; ">Rosario, Argentina</h1>
+                                                    <h1 id="ubicacion " class="p " style="color: #E0FFFF; ">
+                                                        <%= ubicacion %>
+                                                    </h1>
 
                                                     <%} else  {%>
 
-                                                        <h1 id="ubicacion " class="p ">Rosario, Argentina</h1>
+                                                        <h1 id="ubicacion " class="p ">
+                                                            <%= ubicacion %>
+                                                        </h1>
                                                         <% } %>
                                                             <p class="date ">Hora:
-                                                                <%= hours + ": " + minutes %>
+                                                                <%= hours + ":" + minutes %>
                                                             </p>
                                                             <p class="invisible ">gola</p>
                                                             <p class="invisible ">gola</p>
