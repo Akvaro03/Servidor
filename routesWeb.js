@@ -13,10 +13,12 @@ const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/us
     //express sessions
 const session = require(`express-session`)
 const MongoDBSession = require(`connect-mongodb-session`)(session);
+const callback = require(`./public/jss/callbacks`);
 const store = new MongoDBSession({
     uri: uri,
     collection: `mySession`,
 })
+
 router.use(session({
     key: `klimarios`,
     secret: `key`,
@@ -38,6 +40,7 @@ app.use(express.static('./public'))
 
 router.get(`/`, isAuth, async(req, res) => {
     const nombre = req.session.nombre;
+    callback.saludar(nombre);
     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
         .then(response => response.data)
         .then(data => { return data.main })
@@ -61,6 +64,32 @@ router.get(`/`, isAuth, async(req, res) => {
     res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
     console.log(req.session.ip);
 });
+
+router.get(`/arduino`, isAuth, async(req, res) => {
+    const nombre = req.session.nombre;
+    callback.saludar(nombre);
+    const response = await axios.get(`192.168.0.31`)
+        .catch(error => { return new Error(error) });
+    const dataTemp = response.temperature;
+    const dataHumi = response.Humidity;
+    const dataTempMax = "cualquier numero";
+    const dataFeels = "cualquier numero";
+
+
+    const user = await User.find({ username: nombre })
+        .then(user => { return user[0] })
+    let ubicacion = user.ubicacion;
+    if (ubicacion == "none") {
+        ubicacion = "configure su ubicacion"
+    }
+    console.log(ubicacion)
+
+    let date = new Date()
+    let direccion = "norte";
+    res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
+    console.log(req.session.ip);
+});
+
 
 router.post('/register', async function(req, res) {
     const { username, password } = req.body;
