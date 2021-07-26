@@ -25,7 +25,7 @@ const isAuth = (req, res, next) => {
     if (req.session.isAuth) {
         next();
     } else {
-        res.redirect(`http://localhost:3000/cuenta`)
+        res.redirect(`/cuenta`)
     }
 };
 //motor vista

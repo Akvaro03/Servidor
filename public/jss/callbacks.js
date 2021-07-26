@@ -29,7 +29,7 @@ const isAuth = (req, res, next) => {
     if (req.session.isAuth) {
         next();
     } else {
-        res.redirect(`http://localhost:3000/cuenta`)
+        res.redirect(`/cuenta`)
     }
 };
 
@@ -62,7 +62,7 @@ const authenticate = async(req, res) => {
                         req.session.isAuth = true;
                         req.session.nombre = username;
                         console.log("autentificacion nombre=" + req.session.nombre);
-                        res.redirect(`http://localhost:3000/`);
+                        res.redirect(`/`);
                     } else {
                         res.status(500).send(`USUARIO Y/O CONTRASEÑA INCORRECTA`);
                     }
@@ -75,7 +75,7 @@ const authenticate = async(req, res) => {
 const cerrarSesion = async(req, res) => {
     try {
         req.session.destroy()
-        res.redirect(`http://localhost:3000/cuenta`);
+        res.redirect(`/cuenta`);
     } catch (error) {
         console.log(error)
     }
@@ -92,7 +92,7 @@ const register = async(req, res) => {
             req.session.nombre = username;
             console.log("register username= " + username);
             req.session.isAuth = true;
-            res.status(200).redirect(301, `http://localhost:3000/opciones`);
+            res.status(200).redirect(301, `/opciones`);
         })
         .catch(err => { res.status(500).send(`ERRROR AL REGISTRAR EN EL USERNAME O CONTRASEÑA`); });
 
@@ -161,7 +161,7 @@ const configuracion = async(req, res) => {
         }
     })
 
-    res.redirect(`http://localhost:3000/`)
+    res.redirect(`/`)
 }
 
 module.exports = {

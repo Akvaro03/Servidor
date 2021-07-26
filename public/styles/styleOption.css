@@ -8,6 +8,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-size: cover;
+    background-repeat: no-repeat;
     background-image: url("/img/fondOption.jpg");
 }
 
@@ -253,4 +254,66 @@ body {
     opacity: 1;
     visibility: visible;
     -webkit-transition: all 0.3s ease;
+}
+
+@media (max-width:800px) {
+    body {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: url("/img/fondOption.jpg");
+    }
+    .form-structor {
+        border-radius: 15px;
+        height: 850px;
+        width: 500px;
+        position: relative;
+        backdrop-filter: blur(3px);
+        overflow: hidden;
+        border-radius: 15px;
+    }
+    .form-structor .signup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        width: 85%;
+        z-index: 5;
+        -webkit-transition: all 0.3s ease;
+    }
+}
+
+@media (max-width:500px) {
+    body {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: url("/img/fondOption.jpg");
+    }
+    .form-structor {
+        border-radius: 15px;
+        height: 550px;
+        width: 350px;
+        position: relative;
+        backdrop-filter: blur(3px);
+        overflow: hidden;
+        border-radius: 15px;
+    }
+    .form-structor .signup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        width: 85%;
+        z-index: 5;
+        -webkit-transition: all 0.3s ease;
+    }
 }

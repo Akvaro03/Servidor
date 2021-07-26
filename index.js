@@ -9,6 +9,7 @@ const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/us
 mongoose.set('useFindAndModify', false);
 
 const User = require(`./public/jss/user`);
+
 const port = process.env.PORT || 3000;
 
 mongoose.connect(uri, {

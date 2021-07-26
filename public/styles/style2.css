@@ -269,3 +269,69 @@ body {
     visibility: visible;
     -webkit-transition: all 0.3s ease;
 }
+
+@media (max-width:800px) {
+    .form-structor {
+        background-color: #222;
+        border-radius: 15px;
+        height: 850px;
+        width: 500px;
+        position: relative;
+        overflow: hidden;
+    }
+    .form-structor::after {
+        content: "";
+        opacity: 0.8;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: 750px;
+        background-image: url("/img/fondoLogin.jpg");
+    }
+    .form-structor .signup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        width: 85%;
+        z-index: 5;
+        -webkit-transition: all 0.3s ease;
+    }
+}
+
+@media (max-width:500px) {
+    .form-structor {
+        background-color: #222;
+        border-radius: 15px;
+        height: 550px;
+        width: 350px;
+        position: relative;
+        overflow: hidden;
+    }
+    .form-structor::after {
+        content: "";
+        opacity: 0.8;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: 750px;
+        background-image: url("/img/fondoLogin.jpg");
+    }
+    .form-structor .signup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        width: 85%;
+        z-index: 5;
+        -webkit-transition: all 0.3s ease;
+    }
+}
