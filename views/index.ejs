@@ -36,15 +36,15 @@
 
                                             <div class="container22 " id="hora ">
                                                 <% if (hours >= 20 || hours <= 7 ) {%>
-                                                    <h1 id="ubicacion " class="p " style="color: #E0FFFF; ">
-                                                        <%= ubicacion %>
-                                                    </h1>
-
+                                                    <form action="/ubicacion" method="post" id="formReg" style="color: #E0FFFF; ">
+                                                        <input type="text" class="input" placeholder="idAr" name="ubicacion" id="input" />
+                                                        <button class="submit-btn" type="submit">Configura</button>
+                                                    </form>
                                                     <%} else  {%>
-
-                                                        <h1 id="ubicacion " class="p ">
-                                                            <%= ubicacion %>
-                                                        </h1>
+                                                        <form action="/ubicacion" method="post" id="formReg" style="color: #E0FFFF; ">
+                                                            <input type="text" class="input" placeholder="idAr" name="ubicacion" id="input" />
+                                                            <button class="submit-btn" type="submit">Configura</button>
+                                                        </form>
                                                         <% } %>
                                                             <p class="date ">Hora:
                                                                 <%= hours + ":" + minutes %>
@@ -223,7 +223,7 @@
                                                                             </div>
 
                                                                 </div>
-                                                                <script src="/jss/js.js "></script>
+                                                                <script src="/jss/index.js "></script>
                                                                 <% if (hours > 20) {
                             const estadoDia = "Dia "
                         } else { 

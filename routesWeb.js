@@ -33,11 +33,11 @@ app.set(`view engine`, `ejs`);
 app.set(`views`, __dirname + `/views`)
 app.use(express.static('./public'))
 
-router.get(`/`, isAuth, async(req, res) => {
+router.get(`/`, async(req, res) => {
     callback.inicio(req, res);
 });
 
-router.get(`/arduino`, isAuth, async(req, res) => {
+router.get(`/arduino`, async(req, res) => {
     callback.arduino(req, res);
 });
 
@@ -53,12 +53,15 @@ router.post('/authenticate', (req, res) => {
     callback.autenticacion(req, res);
 })
 
-router.get('/opciones', (req, res) => {
+router.get('/opciones', isAuth, (req, res) => {
     callback.opciones(req, res);
 });
 
 router.post('/configuracion', (req, res) => {
     callback.configuracion(req, res);
+});
+router.post('/ubicacion', (req, res) => {
+    callback.ubicacion(req, res);
 });
 
 module.exports = router;

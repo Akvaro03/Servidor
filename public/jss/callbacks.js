@@ -100,7 +100,7 @@ const register = async(req, res) => {
 }
 
 const arduino = async(req, res) => {
-    const nombre = req.session.nombre;
+    var nombre = "Crear cuenta";
     const response = await axios.get(`192.168.0.31`)
         .catch(error => { return new Error(error) });
     const dataTemp = response.temperature;
@@ -108,14 +108,20 @@ const arduino = async(req, res) => {
     const dataTempMax = "cualquier numero";
     const dataFeels = "cualquier numero";
 
-
-    const user = await User.find({ username: nombre })
-        .then(user => { return user[0] })
-    let ubicacion = user.ubicacion;
-    if (ubicacion == "none") {
-        ubicacion = "configure su ubicacion"
+    var ubicacion = "none";
+    if (req.session.nombre) {
+        nombre = req.session.nombre;
     }
-    console.log(ubicacion)
+    if (req.session.isAuth) {
+        const user = await User.find({ username: nombre })
+            .then(user => { return user[0] })
+        ubicacion = user.ubicacion;
+        console.log(ubicacion)
+    }
+    if (ubicacion == "none") {
+        ubicacion = "Configure su ubicacion"
+    }
+
 
     let date = new Date()
     let direccion = "norte";
@@ -124,8 +130,8 @@ const arduino = async(req, res) => {
 }
 
 const inicio = async(req, res) => {
-    const nombre = req.session.nombre;
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
+    var nombre = "Crear cuenta";
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=jasjsajasj&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
         .then(response => response.data)
         .then(data => { return data.main })
         .catch(error => { return new Error(error) });
@@ -134,14 +140,19 @@ const inicio = async(req, res) => {
     const dataTempMax = response.temp_max;
     const dataFeels = response.feels_like;
 
-
-    const user = await User.find({ username: nombre })
-        .then(user => { return user[0] })
-    let ubicacion = user.ubicacion;
-    if (ubicacion == "none") {
-        ubicacion = "configure su ubicacion"
+    var ubicacion = "none";
+    if (req.session.nombre) {
+        nombre = req.session.nombre;
     }
-    console.log(ubicacion)
+    if (req.session.isAuth) {
+        const user = await User.find({ username: nombre })
+            .then(user => { return user[0] })
+        ubicacion = user.ubicacion;
+        console.log(ubicacion)
+    }
+    if (ubicacion == "none") {
+        ubicacion = "Configure su ubicacion"
+    }
 
     let date = new Date()
     let direccion = "norte";
@@ -164,6 +175,12 @@ const configuracion = async(req, res) => {
     res.redirect(`/`)
 }
 
+const ubicacion = async(req, res) => {
+    const { ubicacion } = req.body;
+    console.log(ubicacion);
+    res.redirect(`/?ubicacion=${ubicacion}`)
+}
+
 module.exports = {
     opciones: opciones,
     autenticacion: authenticate,
@@ -171,5 +188,6 @@ module.exports = {
     register: register,
     arduino: arduino,
     inicio: inicio,
-    configuracion: configuracion
+    configuracion: configuracion,
+    ubicacion: ubicacion
 };
