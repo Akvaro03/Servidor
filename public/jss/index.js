@@ -1,21 +1,29 @@
-var counterVal = 1;
+var counterVal = 0;
 
 function incrementClick() {
     ++counterVal
 }
 
-
+//nav responsive
 document.querySelector(".menu-btn").addEventListener("click", () => {
     document.querySelector(".nav-menu").classList.toggle("show");
 });
 
+//botton contacto
 document.querySelector(".btnContacto").addEventListener("click", () => {
     document.querySelector(".form").classList.toggle("displey");
 });
+//boton sacar contacto
 document.querySelector(".contenedor").addEventListener("click", () => {
     console.log(counterVal)
+    var tipo = (counterVal % 2) ? "Impar" : "Par";
+    console.log(tipo)
     document.querySelector(".contenedor").classList.toggle("ver");
     incrementClick
+});
+
+document.querySelector("#x-contact").addEventListener("click", () => {
+    document.querySelector(".form").classList.toggle("displey");
 });
 
 
@@ -48,9 +56,7 @@ $(document).ready(function() { // Esta parte del código se ejecutará automáti
                 url: "/contact",
                 data: $("#formdata").serialize(),
                 success: function() {
-                    incrementClick()
                     document.querySelector(".contenedor").classList.toggle("ver");
-
                 }
             })
         }

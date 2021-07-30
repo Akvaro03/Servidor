@@ -177,7 +177,7 @@ nav div {
     position: absolute;
     top: 15px;
     right: 30px;
-    z-index: 2;
+    z-index: 1;
     display: none;
 }
 
@@ -192,10 +192,9 @@ label {
     padding: 20px 30px;
     max-width: calc(100vw - 40px);
     font-family: "Montserrat", sans-serif;
-    height: 10 0%;
-    z-index: 5;
-    transform: translateY(-700px);
-    transition: transform 0.9s ease-in-out;
+    z-index: 2;
+    transform: translate(-250px, -600px);
+    transition: transform 0.5s Ease-out;
 }
 
 .h2 {
@@ -266,7 +265,7 @@ span {
 }
 
 .displey {
-    transform: translateX(-20px);
+    transform: translateY(-20px);
     display: block;
 }
 
@@ -276,17 +275,19 @@ span {
     background: white;
     border-radius: 15px;
     margin-left: 83%;
-    transform: translate(-50px, -700px);
+    transform: translate(-70px, -700px);
     transition: transform 0.9s ease-in-out;
+    z-index: 10;
 }
 
 .ver {
-    transform: translate(-50px, -400px);
+    transform: translate(-70px, -400px);
 }
 
 .contenedor2 {
     display: flex;
     margin: 7px;
+    z-index: 10;
 }
 
 .contenedor p,
@@ -301,11 +302,43 @@ span {
     margin-right: 60px;
 }
 
-.fa-times {
+#x {
     padding-bottom: 20px;
 }
 
+#x-contact {
+    position: absolute;
+    margin-left: 75%;
+}
+
 @media (max-width:800px) {
+    .form {
+        height: 500px;
+    }
+    .contenedor {
+        width: 183px;
+    }
+    .contenedor p,
+    .contenedor i {
+        padding-right: 6px;
+        margin: 0px;
+    }
+    .displey {
+        transform: translateY(60px);
+    }
+    #x {
+        padding-top: 2px;
+        padding-bottom: 0px;
+    }
+    .ver {
+        transform: translate(-70px, -500px);
+    }
+    .contenedor2 {
+        display: flex;
+        margin: 7px;
+        padding: 8px;
+        width: 800px;
+    }
     .menu-btn {
         display: block;
     }
@@ -322,7 +355,7 @@ span {
         top: 0;
         left: 0;
         background: #2f3640;
-        width: 40%;
+        width: 50%;
         height: 100%;
         border-right: #ccc 1px solid;
         opacity: 1;
