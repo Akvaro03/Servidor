@@ -2,8 +2,11 @@
 const express = require('express');
 const app = express();
 //router
+const fs = require('fs');
 const router = express.Router();
 const path = require('path');
+const bodyParser = require(`body-parser`);
+
 //mongo url
 const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`;
 //express sessions
@@ -32,6 +35,8 @@ const isAuth = (req, res, next) => {
 app.set(`view engine`, `ejs`);
 app.set(`views`, __dirname + `/views`)
 app.use(express.static('./public'))
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support enc
 
 router.get(`/`, async(req, res) => {
     callback.inicio(req, res);
@@ -62,6 +67,10 @@ router.post('/configuracion', (req, res) => {
 });
 router.post('/ubicacion', (req, res) => {
     callback.ubicacion(req, res);
+});
+
+router.post('/contact', (req, res) => {
+    callback.contact(req, res);
 });
 
 module.exports = router;

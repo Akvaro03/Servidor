@@ -1,21 +1,33 @@
 //express
 const express = require('express');
 const app = express();
+const bodyParser = require(`body-parser`);
+
+const fs = require('fs');
 //router
 const router = express.Router();
 //axios
 const axios = require('axios');
 //schemma user
 const User = require(`./user`);
+// mail
+const nodemailer = require('nodemailer');
 //mongo url
 const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`
     //express sessions
 const session = require(`express-session`)
 const MongoDBSession = require(`connect-mongodb-session`)(session);
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support enc
+
 const store = new MongoDBSession({
     uri: uri,
     collection: `mySession`,
 })
+
+function mayusculaPrimera(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 router.use(session({
     key: `klimarios`,
@@ -125,22 +137,41 @@ const arduino = async(req, res) => {
 
     let date = new Date()
     let direccion = "norte";
-    res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
+    res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
     console.log(req.session.ip);
 }
 
 const inicio = async(req, res) => {
+    let { ubicacion, elegida } = req.query;
     var nombre = "Crear cuenta";
-    const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=jasjsajasj&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
-        .then(response => response.data)
-        .then(data => { return data.main })
-        .catch(error => { return new Error(error) });
-    const dataTemp = response.temp;
-    const dataHumi = response.humidity;
-    const dataTempMax = response.temp_max;
-    const dataFeels = response.feels_like;
+    var dataTemp;
+    var dataHumi;
+    var dataTempMax;
+    var dataFeels;
 
-    var ubicacion = "none";
+    if (elegida == "yes") {
+        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
+            .then(response => response.data)
+            .then(data => { return data.main })
+            .catch(error => { return new Error(error) });
+        dataTemp = response.temp;
+        dataHumi = response.humidity;
+        dataTempMax = response.temp_max;
+        dataFeels = response.feels_like;
+        console.log(ubicacion);
+    } else {
+        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
+            .then(response => response.data)
+            .then(data => { return data.main })
+            .catch(error => { return new Error(error) });
+        dataTemp = response.temp;
+        dataHumi = response.humidity;
+        dataTempMax = response.temp_max;
+        dataFeels = response.feels_like;
+        ubicacion = "rosario";
+    }
+
+
     if (req.session.nombre) {
         nombre = req.session.nombre;
     }
@@ -150,9 +181,8 @@ const inicio = async(req, res) => {
         ubicacion = user.ubicacion;
         console.log(ubicacion)
     }
-    if (ubicacion == "none") {
-        ubicacion = "Configure su ubicacion"
-    }
+
+    ubicacion = mayusculaPrimera(ubicacion);
 
     let date = new Date()
     let direccion = "norte";
@@ -178,16 +208,61 @@ const configuracion = async(req, res) => {
 const ubicacion = async(req, res) => {
     const { ubicacion } = req.body;
     console.log(ubicacion);
-    res.redirect(`/?ubicacion=${ubicacion}`)
+    res.redirect(`/?ubicacion=${ubicacion}&elegida=yes`)
 }
+
+const contact = async(req, res) => {
+    const { email, asunto, message } = req.body;
+
+
+
+    transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        ignoreTLS: false,
+        secure: false,
+        auth: {
+            user: 'alvaroballarini2010@gmail.com',
+            pass: '141003@Ba'
+        }
+    });
+    const mailOptions = {
+        from: 'alvaroballarini2010@gmail.com',
+        to: 'alvaroballarini2010@hotmail.com',
+        subject: `${email} - ${asunto}`,
+        text: message
+    };
+    const product = [{
+        id: 1
+    }]
+    res.json(product)
+    transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+            console.log(error)
+        } else {
+            res.status(200);
+            console.log('Email enviado: ' + info.response);
+            res.send('Datos guardados con éxito');
+        }
+    });
+}
+
+// const get = async(req, res) => {
+//     const file = fs.readFileSync('./peliculas.json', 'UTF-8');
+
+//     res.setHeader('Content-type', 'text/json');
+//     res.send(file); 
+// };
 
 module.exports = {
     opciones: opciones,
+    // get: get,
     autenticacion: authenticate,
     cerrarSesion: cerrarSesion,
     register: register,
     arduino: arduino,
     inicio: inicio,
     configuracion: configuracion,
-    ubicacion: ubicacion
+    ubicacion: ubicacion,
+    contact: contact
 };
