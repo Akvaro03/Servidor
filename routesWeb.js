@@ -47,7 +47,7 @@ router.get(`/arduino`, async(req, res) => {
 });
 
 router.post('/register', async function(req, res) {
-    callback.register(req, res);
+    await callback.register(req, res);
 })
 
 router.get('/cerrarSesion', async function(req, res) {
