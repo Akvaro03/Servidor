@@ -98,7 +98,7 @@ const register = async(req, res) => {
     const user = new User({ username, password });
 
     user.save()
-        .then(function(user) {
+        .then(await function(user) {
             req.session.ip = user._id;
             console.log("register id= " + user._id);
             req.session.nombre = username;
