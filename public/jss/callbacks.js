@@ -10,6 +10,7 @@ const router = express.Router();
 const axios = require('axios');
 //schemma user
 const User = require(`./user`);
+const Datos = require(`./datos`);
 // mail
 const nodemailer = require('nodemailer');
 //mongo url
@@ -98,14 +99,15 @@ const register = async(req, res) => {
     const user = new User({ username, password });
 
     user.save()
-        .then(function(user) {
-            req.session.ip = user._id;
-            console.log("register id= " + user._id);
-            req.session.nombre = username;
-            console.log("register username= " + username);
-            req.session.isAuth = true;
-            res.status(200).redirect(301, `/opciones`);
-        })
+        .then(await
+            function(user) {
+                req.session.ip = user._id;
+                console.log("register id= " + user._id);
+                req.session.nombre = username;
+                console.log("register username= " + username);
+                req.session.isAuth = true;
+                res.status(200).redirect(301, `/opciones`);
+            })
         .catch(err => { res.status(500).send(`ERRROR AL REGISTRAR EN EL USERNAME O CONTRASEÑA`); });
 
 
@@ -143,6 +145,22 @@ const arduino = async(req, res) => {
 
 const inicio = async(req, res) => {
     let { ubicacion, elegida } = req.query;
+    const { a, b } = req.query;
+    const datos = new Datos({ a, b });
+    try {
+        await datos.save();
+        return res.send('Correcto')
+            // await datos.save(err => {
+            //     if (err) {
+            //         return res.status(500).send(`ERRROR AL REGISTRAR ${err}`);
+            //     } else {
+            //         return res.status(200).send(`Se logro`);
+            //     }
+            // })
+    } catch (e) {
+        throw new Error(`Error guardando datos: ${e}`)
+    }
+
     var nombre = "Crear cuenta";
     var dataTemp;
     var dataHumi;

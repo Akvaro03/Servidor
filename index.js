@@ -36,21 +36,23 @@ app.use(express.static('./public'))
 
 
 app.use('/', require('./routesWeb'));
-app.get('/urlparam', (req, res) => {
+app.get('/urlparam', async(req, res) => {
 
-
-    const { temp, humedad, viento } = req.query;
-
-
-    const datos = new Datos({ temp, humedad, viento });
-
-    datos.save(err => {
-        if (err) {
-            res.status(500).send(`ERRROR AL REGISTRAR ${err}`);
-        } else {
-            res.status(200).send(`Se logro`);
-        }
-    })
+    const { a, b } = req.query;
+    const datos = new Datos({ a, b });
+    try {
+        await datos.save();
+        return res.send('Correcto')
+            // await datos.save(err => {
+            //     if (err) {
+            //         return res.status(500).send(`ERRROR AL REGISTRAR ${err}`);
+            //     } else {
+            //         return res.status(200).send(`Se logro`);
+            //     }
+            // })
+    } catch (e) {
+        throw new Error(`Error guardando datos: ${e}`)
+    }
 });
 
 app.get('/cuenta', (req, res) => {
