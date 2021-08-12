@@ -144,15 +144,15 @@ const arduino = async(req, res) => {
 }
 
 const inicio = async(req, res) => {
-    let { ubicacion, elegida } = req.query;
+    let { ubicacion } = req.query;
     const { a, b } = req.query;
     try {
+        res.status(500);
         if (a != undefined || b != undefined) {
-            console.log(a, b);
-            const datos = new Datos({ a, b });
+            await console.log(a, b);
+            const datos = await new Datos({ a, b });
             await datos.save();
         }
-        console.log(a, b);
         // await datos.save(err => {
         //     if (err) {
         //         return res.status(500).send(`ERRROR AL REGISTRAR ${err}`);
@@ -170,7 +170,7 @@ const inicio = async(req, res) => {
     var dataTempMax;
     var dataFeels;
 
-    if (elegida == "yes") {
+    if (ubicacion != undefined) {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
             .then(response => response.data)
             .then(data => { return data.main })
@@ -193,22 +193,20 @@ const inicio = async(req, res) => {
     }
 
 
-    if (req.session.nombre) {
+    if (req.session.nombre != undefined) {
         nombre = req.session.nombre;
     }
-    if (req.session.isAuth) {
+    if (req.session.isAuth != undefined) {
         const user = await User.find({ username: nombre })
             .then(user => { return user[0] })
         ubicacion = user.ubicacion;
         console.log(ubicacion)
     }
 
-    ubicacion = mayusculaPrimera(ubicacion);
 
     let date = new Date()
     let direccion = "norte";
-    res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
-    console.log(req.session.ip);
+    await res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
 }
 
 const configuracion = async(req, res) => {
