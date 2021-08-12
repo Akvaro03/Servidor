@@ -146,9 +146,9 @@ const arduino = async(req, res) => {
 const inicio = async(req, res) => {
     let { ubicacion } = req.query;
     const { a, b } = req.query;
-    res.status(500);
+    res.status(200);
     try {
-        res.status(500);
+        res.status(200);
         if (a != undefined || b != undefined) {
             await console.log(a, b);
             const datos = await new Datos({ a, b });
