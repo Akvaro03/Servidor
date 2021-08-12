@@ -2,7 +2,7 @@ const express = require(`express`);
 const mongoose = require(`mongoose`);
 
 const DatosSchema = new mongoose.Schema({
-    a: { type: Number },
+    a: { type: Number},
     b: { type: Number }
 });
 
