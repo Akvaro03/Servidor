@@ -7,6 +7,8 @@ const app = express();
 const bodyParser = require(`body-parser`);
 const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`
 mongoose.set('useFindAndModify', false);
+const compression = require('compression');
+app.use(compression());
 
 const User = require(`./public/jss/user`);
 
@@ -36,7 +38,7 @@ app.use(express.static('./public'))
 
 
 app.use('/', require('./routesWeb'));
-app.get('/urlparam', async (req, res) => {
+app.get('/urlparam', async(req, res) => {
 
 
     const { a, b } = req.query;
@@ -47,14 +49,14 @@ app.get('/urlparam', async (req, res) => {
     try {
         await datos.save();
         return res.send('Correcto')
-        // await datos.save(err => {
-        //     if (err) {
-        //         return res.status(500).send(`ERRROR AL REGISTRAR ${err}`);
-        //     } else {
-        //         return res.status(200).send(`Se logro`);
-        //     }
-        // })
-    } catch(e) {
+            // await datos.save(err => {
+            //     if (err) {
+            //         return res.status(500).send(`ERRROR AL REGISTRAR ${err}`);
+            //     } else {
+            //         return res.status(200).send(`Se logro`);
+            //     }
+            // })
+    } catch (e) {
         throw new Error(`Error guardando datos: ${e}`)
     }
 });

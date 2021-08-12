@@ -6,6 +6,8 @@ const fs = require('fs');
 const router = express.Router();
 const path = require('path');
 const bodyParser = require(`body-parser`);
+const compression = require('compression');
+app.use(compression());
 
 //mongo url
 const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`;
