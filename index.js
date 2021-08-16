@@ -39,26 +39,11 @@ app.use(express.static('./public'))
 
 app.use('/', require('./routesWeb'));
 app.get('/urlparam', async(req, res) => {
+    res.json({
+        alvaro: "holaaa",
+        jose: "peron peron"
+    })
 
-
-    const { a, b } = req.query;
-
-
-    const datos = new Datos({ a, b });
-
-    try {
-        await datos.save();
-        return res.send('Correcto')
-            // await datos.save(err => {
-            //     if (err) {
-            //         return res.status(500).send(`ERRROR AL REGISTRAR ${err}`);
-            //     } else {
-            //         return res.status(200).send(`Se logro`);
-            //     }
-            // })
-    } catch (e) {
-        throw new Error(`Error guardando datos: ${e}`)
-    }
 });
 
 app.get('/cuenta', (req, res) => {

@@ -14,12 +14,13 @@ const Datos = require(`./datos`);
 // mail
 const nodemailer = require('nodemailer');
 //mongo url
-const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`
-    //express sessions
+const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`;
+//express sessions
 const session = require(`express-session`)
 const MongoDBSession = require(`connect-mongodb-session`)(session);
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support enc
+const jwt = require('jsonwebtoken');
 
 const store = new MongoDBSession({
     uri: uri,
@@ -46,10 +47,33 @@ const isAuth = (req, res, next) => {
     }
 };
 
+const isAuth22 = (req, res, next) => {
+    const token = req.headers['authorization']
+    if (!token) {
+        res.send({
+            ok: false,
+            message: 'Toket inválido'
+        })
+    }
+
+    jwt.verify(token, "contraseña", function(err, token) {
+        if (err) {
+            return res.send({
+                ok: false,
+                message: 'Toket inválido',
+                token: "token"
+            });
+        } else {
+            console.log(token);
+            next();
+        }
+    });
+};
+
+
 const opciones = async(req, res) => {
-    console.log("opciones ip= " + req.session.ip);
     res.render("opciones.ejs", {})
-}
+};
 
 const authenticate = async(req, res) => {
     const { username, password } = req.body;
@@ -68,13 +92,19 @@ const authenticate = async(req, res) => {
 
                         const user = await User.find({ username: username })
                             .then(user => { return user[0] })
-                        console.log("autentificacion ip=" + user._id);
                         req.session.ip = user._id;
-                        console.log("autentificacion ip=" + req.session.ip);
 
                         req.session.isAuth = true;
                         req.session.nombre = username;
-                        console.log("autentificacion nombre=" + req.session.nombre);
+
+                        var u = {
+                            ip: user._id,
+                            username: username
+                        }
+
+                        let token = jwt.sign(u, "contraseña", {
+                            expiresIn: 60 * 60 * 24 // expires in 24 hours
+                        });
                         res.redirect(`/`);
                     } else {
                         res.status(500).send(`USUARIO Y/O CONTRASEÑA INCORRECTA`);
@@ -83,7 +113,7 @@ const authenticate = async(req, res) => {
             }
         })
         .catch(error => { res.status(500).send(`ERRROR AL REGISTRAR`); });
-}
+};
 
 const cerrarSesion = async(req, res) => {
     try {
@@ -92,7 +122,7 @@ const cerrarSesion = async(req, res) => {
     } catch (error) {
         console.log(error)
     }
-}
+};
 
 const register = async(req, res) => {
     const { username, password } = req.body;
@@ -102,16 +132,14 @@ const register = async(req, res) => {
         .then(await
             function(user) {
                 req.session.ip = user._id;
-                console.log("register id= " + user._id);
                 req.session.nombre = username;
-                console.log("register username= " + username);
                 req.session.isAuth = true;
                 res.status(200).redirect(301, `/opciones`);
             })
         .catch(err => { res.status(500).send(`ERRROR AL REGISTRAR EN EL USERNAME O CONTRASEÑA`); });
 
 
-}
+};
 
 const arduino = async(req, res) => {
     var nombre = "Crear cuenta";
@@ -130,7 +158,6 @@ const arduino = async(req, res) => {
         const user = await User.find({ username: nombre })
             .then(user => { return user[0] })
         ubicacion = user.ubicacion;
-        console.log(ubicacion)
     }
     if (ubicacion == "none") {
         ubicacion = "Configure su ubicacion"
@@ -140,17 +167,17 @@ const arduino = async(req, res) => {
     let date = new Date()
     let direccion = "norte";
     res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
-    console.log(req.session.ip);
-}
+};
 
 const inicio = async(req, res) => {
+    const hola = req.headers['contraseña']
+    console.log(hola)
     let { ubicacion } = req.query;
     const { a, b } = req.query;
     res.status(200);
     try {
         res.status(200);
         if (a != undefined || b != undefined) {
-            await console.log(a, b);
             const datos = await new Datos({ a, b });
             await datos.save();
         }
@@ -180,7 +207,6 @@ const inicio = async(req, res) => {
         dataHumi = response.humidity;
         dataTempMax = response.temp_max;
         dataFeels = response.feels_like;
-        console.log(ubicacion);
     } else {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
             .then(response => response.data)
@@ -201,18 +227,16 @@ const inicio = async(req, res) => {
         const user = await User.find({ username: nombre })
             .then(user => { return user[0] })
         ubicacion = user.ubicacion;
-        console.log(ubicacion)
     }
 
 
     let date = new Date()
     let direccion = "norte";
     await res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
-}
+};
 
 const configuracion = async(req, res) => {
     const id = req.session.ip;
-    console.log("configuracion ip= " + req.session.ip);
 
     User.findOneAndUpdate({ _id: id }, req.body, function(err) {
         if (err) {
@@ -223,13 +247,12 @@ const configuracion = async(req, res) => {
     })
 
     res.redirect(`/`)
-}
+};
 
 const ubicacion = async(req, res) => {
     const { ubicacion } = req.body;
-    console.log(ubicacion);
     res.redirect(`/?ubicacion=${ubicacion}&elegida=yes`)
-}
+};
 
 const contact = async(req, res) => {
     const { email, asunto, message } = req.body;
@@ -257,22 +280,13 @@ const contact = async(req, res) => {
     }]
     res.json(product)
     transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-            console.log(error)
-        } else {
+        if (error) {} else {
             res.status(200);
             console.log('Email enviado: ' + info.response);
             res.send('Datos guardados con éxito');
         }
     });
-}
-
-// const get = async(req, res) => {
-//     const file = fs.readFileSync('./peliculas.json', 'UTF-8');
-
-//     res.setHeader('Content-type', 'text/json');
-//     res.send(file); 
-// };
+};
 
 module.exports = {
     opciones: opciones,

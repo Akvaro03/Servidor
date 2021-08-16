@@ -1,6 +1,9 @@
 //express
 const express = require('express');
 const app = express();
+
+const jwt = require('jsonwebtoken');
+
 //router
 const fs = require('fs');
 const router = express.Router();
@@ -33,6 +36,31 @@ const isAuth = (req, res, next) => {
         res.redirect(`/cuenta`)
     }
 };
+const isAuth22 = (req, res, next) => {
+    const token = req.headers['authorization']
+    if (!token) {
+        return res.send({
+            ok: false,
+            message: 'Toket inválido'
+        })
+    }
+    console.log("hola")
+
+    jwt.verify(token, "contraseña", function(err, token) {
+        if (err) {
+            return res.send({
+                ok: false,
+                message: 'Toket inválido',
+                token: "token"
+            });
+        } else {
+            console.log(token);
+            console.log("hola")
+            next();
+        }
+    });
+};
+
 //motor vista
 app.set(`view engine`, `ejs`);
 app.set(`views`, __dirname + `/views`)
@@ -60,7 +88,7 @@ router.post('/authenticate', (req, res) => {
     callback.autenticacion(req, res);
 })
 
-router.get('/opciones', isAuth, (req, res) => {
+router.get('/opciones', isAuth22, (req, res) => {
     callback.opciones(req, res);
 });
 
