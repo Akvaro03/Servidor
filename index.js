@@ -11,6 +11,8 @@ const compression = require('compression');
 app.use(compression());
 
 const User = require(`./public/jss/user`);
+const cors = require('cors')
+app.use(cors())
 
 const port = process.env.PORT || 3000;
 
