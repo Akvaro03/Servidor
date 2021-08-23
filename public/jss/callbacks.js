@@ -173,25 +173,6 @@ const inicio = async(req, res) => {
     const hola = req.headers['contraseña']
     console.log(hola)
     let { ubicacion } = req.query;
-    const { a, b } = req.query;
-    res.status(200);
-    try {
-        res.status(200);
-        if (a != undefined || b != undefined) {
-            const datos = await new Datos({ a, b });
-            await datos.save();
-        }
-        // await datos.save(err => {
-        //     if (err) {
-        //         return res.status(500).send(`ERRROR AL REGISTRAR ${err}`);
-        //     } else {
-        //         return res.status(200).send(`Se logro`);
-        //     }
-        // })
-    } catch (e) {
-        throw new Error(`Error guardando datos: ${e}`)
-    }
-
     var nombre = "Crear cuenta";
     var dataTemp;
     var dataHumi;

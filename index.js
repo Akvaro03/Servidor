@@ -41,11 +41,17 @@ app.use(express.static('./public'))
 
 app.use('/', require('./routesWeb'));
 app.get('/urlparam', async(req, res) => {
-    res.json({
-        alvaro: "holaaa",
-        jose: "peron peron"
-    })
-
+    const { a, b } = req.query;
+    res.status(200).send("hola");
+    try {
+        res.status(200);
+        if (a != undefined || b != undefined) {
+            const datos = await new Datos({ a, b });
+            await datos.save();
+        }
+    } catch (e) {
+        throw new Error(`Error guardando datos: ${e}`)
+    }
 });
 
 app.get('/cuenta', (req, res) => {
