@@ -170,8 +170,10 @@ const arduino = async(req, res) => {
 };
 
 const inicio = async(req, res) => {
-    const hola = req.headers['contraseña']
-    console.log(hola)
+    const { a, b } = req.query;
+    const datos = await new Datos({ a, b });
+    await datos.save();
+
     let { ubicacion } = req.query;
     var nombre = "Crear cuenta";
     var dataTemp;
