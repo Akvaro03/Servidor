@@ -12,7 +12,11 @@ app.use(compression());
 
 const User = require(`./public/jss/user`);
 const cors = require('cors')
-app.use(cors())
+app.use(cors({
+    origin: '*',
+    method: ['POST', 'DELETE', 'PUT', 'GET'],
+    credentials: false
+}))
 
 const port = process.env.PORT || 3000;
 
@@ -40,6 +44,7 @@ app.use(express.static('./public'))
 
 
 app.use('/', require('./routesWeb'));
+
 app.get('/urlparam', async(req, res) => {
     const { a, b } = req.query;
     res.status(200).send("Funciono");
