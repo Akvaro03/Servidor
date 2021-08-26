@@ -46,6 +46,9 @@ app.get('/urlparam', async(req, res) => {
     const datos = await new Datos({ a, b });
     await datos.save();
 });
+app.get('/hola', async(req, res) => {
+    res.send("Funciono");
+});
 
 app.post('/post', async function(req, res) {
     res.send('POST request to the homepage')
