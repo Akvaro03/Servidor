@@ -15,7 +15,7 @@ const cors = require('cors')
 app.use(cors({
     origin: '*',
     method: ['POST', 'DELETE', 'PUT', 'GET'],
-    credentials: true
+    credentials: false
 }))
 
 const port = process.env.PORT || 3000;
