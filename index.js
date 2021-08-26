@@ -7,8 +7,8 @@ const app = express();
 const bodyParser = require(`body-parser`);
 const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`
 mongoose.set('useFindAndModify', false);
-// const compression = require('compression');
-// app.use(compression());
+const compression = require('compression');
+app.use(compression());
 
 const User = require(`./public/jss/user`);
 const cors = require('cors')
