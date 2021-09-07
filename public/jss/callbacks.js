@@ -136,8 +136,6 @@ const register = async(req, res) => {
                 res.status(200).redirect(301, `/opciones`);
             })
         .catch(err => { res.status(500).send(`ERRROR AL REGISTRAR EN EL USERNAME O CONTRASEÑA`); });
-
-
 };
 
 const arduino = async(req, res) => {

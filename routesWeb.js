@@ -88,7 +88,7 @@ router.post('/authenticate', async(req, res) => {
     await callback.autenticacion(req, res);
 })
 
-router.get('/opciones', isAuth22, async(req, res) => {
+router.get('/opciones', isAuth, async(req, res) => {
     await callback.opciones(req, res);
 });
 
