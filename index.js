@@ -64,7 +64,7 @@ app.post('/post', async function(req, res) {
     console.log({ y, z })
     const datos = await new Datos({ a, b });
     await datos.save();
-    res.status(200).send("Funciono");
+    res.status(200).send(a);
 
     // try {
     //     res.status(200);
