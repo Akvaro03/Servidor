@@ -69,11 +69,11 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support enc
 
 router.get(`/`, async(req, res) => {
-    callback.inicio(req, res);
+    await callback.inicio(req, res);
 });
 
 router.get(`/arduino`, async(req, res) => {
-    callback.arduino(req, res);
+    await callback.arduino(req, res);
 });
 
 router.post('/register', async function(req, res) {
@@ -81,26 +81,26 @@ router.post('/register', async function(req, res) {
 })
 
 router.get('/cerrarSesion', async function(req, res) {
-    callback.cerrarSesion(req, res);
+    await callback.cerrarSesion(req, res);
 });
 
-router.post('/authenticate', (req, res) => {
-    callback.autenticacion(req, res);
+router.post('/authenticate', async(req, res) => {
+    await callback.autenticacion(req, res);
 })
 
-router.get('/opciones', isAuth22, (req, res) => {
-    callback.opciones(req, res);
+router.get('/opciones', isAuth22, async(req, res) => {
+    await callback.opciones(req, res);
 });
 
-router.post('/configuracion', (req, res) => {
-    callback.configuracion(req, res);
+router.post('/configuracion', async(req, res) => {
+    await callback.configuracion(req, res);
 });
-router.post('/ubicacion', (req, res) => {
-    callback.ubicacion(req, res);
+router.post('/ubicacion', async(req, res) => {
+    await callback.ubicacion(req, res);
 });
 
-router.post('/contact', (req, res) => {
-    callback.contact(req, res);
+router.post('/contact', async(req, res) => {
+    await callback.contact(req, res);
 });
 
 module.exports = router;
