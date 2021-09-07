@@ -18,6 +18,9 @@ const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/us
 //express sessions
 const session = require(`express-session`)
 const MongoDBSession = require(`connect-mongodb-session`)(session);
+const mongoose = require(`mongoose`);
+
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support enc
 const jwt = require('jsonwebtoken');
@@ -146,7 +149,7 @@ const arduino = async(req, res) => {
     const dataHumi = response.Humidity;
     const dataTempMax = "cualquier numero";
     const dataFeels = "cualquier numero";
-
+    console.log(mongoose.data.findOne({}, { sort: { $natural: -1 } }));
     var ubicacion = "none";
     if (req.session.nombre) {
         nombre = req.session.nombre;
