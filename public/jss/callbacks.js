@@ -3,14 +3,18 @@ const express = require('express');
 const app = express();
 const bodyParser = require(`body-parser`);
 
+
+
 const fs = require('fs');
 //router
 const router = express.Router();
 //axios
 const axios = require('axios');
-//schemma user
+//schemma 
 const User = require(`./user`);
 const Datos = require(`./datos`);
+const historial = require(`./historial`);
+
 // mail
 const nodemailer = require('nodemailer');
 //mongo url
@@ -19,6 +23,8 @@ const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/us
 const session = require(`express-session`)
 const MongoDBSession = require(`connect-mongodb-session`)(session);
 const mongoose = require(`mongoose`);
+
+const connection = require('./mongo.js');
 
 
 app.use(bodyParser.json()); // support json encoded bodies
@@ -142,31 +148,58 @@ const register = async(req, res) => {
 };
 
 const arduino = async(req, res) => {
+    let { ubicacion } = req.query;
     var nombre = "Crear cuenta";
-    const response = await axios.get(`192.168.0.31`)
-        .catch(error => { return new Error(error) });
-    const dataTemp = response.temperature;
-    const dataHumi = response.Humidity;
-    const dataTempMax = "cualquier numero";
-    const dataFeels = "cualquier numero";
-    console.log(mongoose.data.findOne({}, { sort: { $natural: -1 } }));
-    var ubicacion = "none";
-    if (req.session.nombre) {
+    var dataTemp;
+    var dataHumi;
+    var dataTempMax;
+    var dataFeels;
+
+    let date = await new Date();
+    let hours = date.getHours();
+    let day = date.getDate();
+    let minutes = date.getMinutes()
+
+    const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
+        .then(user => { return user[0] })
+        console.log(datoAhora);
+
+    if (datoAhora != undefined) {
+        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
+            .then(response => response.data)
+            .then(data => { return data.main })
+            .catch(error => { return new Error(error) });
+        dataTemp = datoAhora.temp;
+        dataHumi = datoAhora.hum;
+        dataTempMax = response.temp_max;
+        dataFeels = response.feels_like;
+    } else if (datoAhora) {
+        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
+            .then(response => response.data)
+            .then(data => { return data.main })
+            .catch(error => { return new Error(error) });
+            dataTemp = datoAhora.temp;
+            dataHumi = datoAhora.hum;
+            dataTempMax = response.temp_max;
+        dataFeels = response.feels_like;
+        ubicacion = "rosario";
+    }
+
+
+    if (req.session.nombre != undefined) {
         nombre = req.session.nombre;
     }
-    if (req.session.isAuth) {
+    if (req.session.isAuth != undefined) {
         const user = await User.find({ username: nombre })
             .then(user => { return user[0] })
         ubicacion = user.ubicacion;
     }
-    if (ubicacion == "none") {
-        ubicacion = "Configure su ubicacion"
-    }
 
-
-    let date = new Date()
+    console.log('temp es ' +  dataTemp)
+    console.log('humd es ' +  dataHumi)
+    
     let direccion = "norte";
-    res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
+    await res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: 15 })
 };
 
 const inicio = async(req, res) => {

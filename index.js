@@ -34,7 +34,6 @@ mongoose.connect(uri, (err) => {
     }
 })
 
-const Datos = require(`./public/jss/datos`);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,15 +41,36 @@ app.use(express.static(path.join(__dirname, `public`)));
 //Rutas web
 app.use(express.static('./public'))
 
-
 app.use('/', require('./routesWeb'));
 
+
+const Datos = require(`./public/jss/datos`);
+const historial = require(`./public/jss/historial`);
+
 app.get('/urlparam', async(req, res) => {
-    const { a, b } = req.query;
+
+    const { temp, hum, pres, bru, ane, vmax } = req.query;
     res.status(200).send("Funciono");
-    const datos = await new Datos({ a, b });
-    await datos.save();
+    if (temp ) {
+        if(hum && pres && bru && ane && vmax) {
+            await Datos.deleteMany({});
+
+            const datos = await new Datos({ temp, hum, pres, bru, ane, vmax });
+            console.log(24)
+
+            let date = new Date();
+            let hours = date.getHours();
+            let day = date.getDate();
+            let minutes = date.getMinutes();
+            const Historial = await new historial({ temp, hum, pres, bru, ane, vmax, day, hours, minutes });
+
+            await datos.save();  
+            await Historial.save();              
+        }
+    }
 });
+
+
 app.get('/hola', async(req, res) => {
     res.send("Funciono");
 });
