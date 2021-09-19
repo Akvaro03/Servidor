@@ -148,7 +148,7 @@ const register = async(req, res) => {
 };
 
 const arduino = async(req, res) => {
-    let { ubicacion } = req.query;
+    let { ubicacion, frase } = req.query;
     var nombre = "Crear cuenta";
     var dataTemp;
     var dataHumi;
@@ -160,9 +160,17 @@ const arduino = async(req, res) => {
     let day = date.getDate();
     let minutes = date.getMinutes()
 
+
+    let fraseDividida = frase.split("/");
+    let primero;
+    for (let i = 0; i < fraseDividida.length; i++) {
+        primero = fraseDividida[i]
+        console.log(primero)            
+    }
+    console.log(fraseDividida.length)
     const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
         .then(user => { return user[0] })
-        console.log(datoAhora);
+        // console.log(datoAhora);
 
     if (datoAhora != undefined) {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
