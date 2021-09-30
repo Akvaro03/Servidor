@@ -46,27 +46,29 @@ app.use('/', require('./routesWeb'));
 
 const Datos = require(`./public/jss/datos`);
 const historial = require(`./public/jss/historial`);
+const functions = require("./public/jss/functions")
 
 app.get('/urlparam', async(req, res) => {
 
-    const { temp, hum, pres, bru, ane, vmax } = req.query;
+    let { temp } = req.query;
     res.status(200).send("Funciono");
     if (temp ) {
-        if(hum && pres && bru && ane && vmax) {
-            await Datos.deleteMany({});
+        functions.dividirCadena(temp,"/")
+        // if(hum && pres && bru && ane && vmax) {
+        //     await Datos.deleteMany({});
 
-            const datos = await new Datos({ temp, hum, pres, bru, ane, vmax });
-            console.log(24)
+        //     const datos = await new Datos({ temp, hum, pres, bru, ane, vmax });
+        //     console.log(24)
 
-            let date = new Date();
-            let hours = date.getHours();
-            let day = date.getDate();
-            let minutes = date.getMinutes();
-            const Historial = await new historial({ temp, hum, pres, bru, ane, vmax, day, hours, minutes });
+        //     let date = new Date();
+        //     let hours = date.getHours();
+        //     let day = date.getDate();
+        //     let minutes = date.getMinutes();
+        //     const Historial = await new historial({ temp, hum, pres, bru, ane, vmax, day, hours, minutes });
 
-            await datos.save();  
-            await Historial.save();              
-        }
+        //     await datos.save();  
+        //     await Historial.save();              
+        // }
     }
 });
 

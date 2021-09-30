@@ -161,14 +161,19 @@ const arduino = async(req, res) => {
     let day = date.getDate();
     let minutes = date.getMinutes()
 
-    let primero;
 
-
-    functions.dividirCadena(temp,"/")
+    if (temp) {
+        functions.dividirCadena(temp,"/")
+    }
 
     const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
         .then(user => { return user[0] })
-        // console.log(datoAhora);
+        .then(user => { return user.temp })
+        for (let index = 0; index < datoAhora.length; index++) {
+            console.log(datoAhora[index]);
+            
+        }
+        console.log(datoAhora[0]);
 
     if (datoAhora != undefined) {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
