@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require(`body-parser`);
 
 
+const functions = require("./functions")
 
 const fs = require('fs');
 //router
@@ -148,7 +149,7 @@ const register = async(req, res) => {
 };
 
 const arduino = async(req, res) => {
-    let { ubicacion, frase } = req.query;
+    let { ubicacion, frase, temp } = req.query;
     var nombre = "Crear cuenta";
     var dataTemp;
     var dataHumi;
@@ -160,14 +161,10 @@ const arduino = async(req, res) => {
     let day = date.getDate();
     let minutes = date.getMinutes()
 
-
-    let fraseDividida = frase.split("/");
     let primero;
-    for (let i = 0; i < fraseDividida.length; i++) {
-        primero = fraseDividida[i]
-        console.log(primero)            
-    }
-    console.log(fraseDividida.length)
+    functions.dividirCadena(temp, "/")
+    functions.dividirCadena(frase, "/")
+
     const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
         .then(user => { return user[0] })
         // console.log(datoAhora);
