@@ -162,8 +162,9 @@ const arduino = async(req, res) => {
     let minutes = date.getMinutes()
 
     let primero;
-    functions.dividirCadena(temp, "/")
-    functions.dividirCadena(frase, "/")
+
+
+    functions.dividirCadena(temp,"/")
 
     const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
         .then(user => { return user[0] })
