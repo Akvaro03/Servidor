@@ -72,7 +72,7 @@ router.get(`/`, async(req, res) => {
     await callback.inicio(req, res);
 });
 
-router.get(`/arduino`, isAuth, async(req, res) => {
+router.get(`/arduino`,  async(req, res) => {
     await callback.arduino(req, res);
 });
 
