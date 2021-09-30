@@ -2,7 +2,8 @@ const Datos = require(`./datos`);
 const historial = require(`./historial`);
 
 var primero = [];
-async function dividirCadena(cadenaADividir,separador) {
+async function dividirCadena(cadenaADividir,separador, dato) {
+
     let arrayDeCadenas = cadenaADividir.split(separador);
     for (let i = 0; i < arrayDeCadenas.length; i++) {
         primero.push(arrayDeCadenas[i])
@@ -15,14 +16,10 @@ async function dividirCadena(cadenaADividir,separador) {
     let hours = date.getHours();
     let day = date.getDate();
     let minutes = date.getMinutes();
-    // const Historial = await new historial({ temp, hum, pres, bru, ane, vmax, day, hours, minutes });
-
-
-    Historial = await new historial({ temp: primero, day, hours, minutes});
-    const datos = await new Datos({temp: primero});
-
+    
+    console.log(dato)
+    let Historial = await new historial({ temp: primero, day, hours, minutes});
     await Historial.save();
-    await datos.save();  
 
 }    
 

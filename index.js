@@ -53,22 +53,9 @@ app.get('/urlparam', async(req, res) => {
     let { temp } = req.query;
     res.status(200).send("Funciono");
     if (temp ) {
-        functions.dividirCadena(temp,"/")
-        // if(hum && pres && bru && ane && vmax) {
-        //     await Datos.deleteMany({});
-
-        //     const datos = await new Datos({ temp, hum, pres, bru, ane, vmax });
-        //     console.log(24)
-
-        //     let date = new Date();
-        //     let hours = date.getHours();
-        //     let day = date.getDate();
-        //     let minutes = date.getMinutes();
-        //     const Historial = await new historial({ temp, hum, pres, bru, ane, vmax, day, hours, minutes });
-
-        //     await datos.save();  
-        //     await Historial.save();              
-        // }
+        // await historial.deleteMany({});
+        functions.dividirCadena(temp,"/", "temp")
+        console.log("hola")
     }
 });
 

@@ -149,7 +149,7 @@ const register = async(req, res) => {
 };
 
 const arduino = async(req, res) => {
-    let { ubicacion, frase, temp } = req.query;
+    let { ubicacion, frase, temp, hum } = req.query;
     var nombre = "Crear cuenta";
     var dataTemp;
     var dataHumi;
@@ -161,9 +161,10 @@ const arduino = async(req, res) => {
     let day = date.getDate();
     let minutes = date.getMinutes()
 
-
+    Datos.deleteMany({});
     if (temp) {
-        functions.dividirCadena(temp,"/")
+        functions.dividirCadena(temp,"/",temp);
+        functions.dividirCadena(hum,"/",hum);
     }
 
     const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
@@ -180,8 +181,8 @@ const arduino = async(req, res) => {
             .then(response => response.data)
             .then(data => { return data.main })
             .catch(error => { return new Error(error) });
-        dataTemp = datoAhora.temp;
-        dataHumi = datoAhora.hum;
+        dataTemp = datoAhora[0];
+        dataHumi = datoAhora[1];
         dataTempMax = response.temp_max;
         dataFeels = response.feels_like;
     } else if (datoAhora) {
