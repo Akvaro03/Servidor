@@ -160,7 +160,7 @@ const arduino = async(req, res) => {
     let hours = date.getHours();
     let day = date.getDate();
     let minutes = date.getMinutes()
-adas
+
     // Datos.deleteMany({});
     if (temp) {
         let hola = functions.dividirCadenaTemp(temp,"/");
@@ -176,26 +176,26 @@ adas
     //     }
     //     console.log(datoAhora[0]);
 
-    if (datoAhora != undefined) {
-        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
-            .then(response => response.data)
-            .then(data => { return data.main })
-            .catch(error => { return new Error(error) });
-        dataTemp = datoAhora[0];
-        dataHumi = datoAhora[1];
-        dataTempMax = response.temp_max;
-        dataFeels = response.feels_like;
-    } else if (datoAhora) {
-        const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
-            .then(response => response.data)
-            .then(data => { return data.main })
-            .catch(error => { return new Error(error) });
-            dataTemp = datoAhora.temp;
-            dataHumi = datoAhora.hum;
-            dataTempMax = response.temp_max;
-        dataFeels = response.feels_like;
-        ubicacion = "rosario";
-    }
+    // if (datoAhora != undefined) {
+    //     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
+    //         .then(response => response.data)
+    //         .then(data => { return data.main })
+    //         .catch(error => { return new Error(error) });
+    //     dataTemp = datoAhora[0];
+    //     dataHumi = datoAhora[1];
+    //     dataTempMax = response.temp_max;
+    //     dataFeels = response.feels_like;
+    // } else if (datoAhora) {
+    //     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
+    //         .then(response => response.data)
+    //         .then(data => { return data.main })
+    //         .catch(error => { return new Error(error) });
+    //         dataTemp = datoAhora.temp;
+    //         dataHumi = datoAhora.hum;
+    //         dataTempMax = response.temp_max;
+    //     dataFeels = response.feels_like;
+    //     ubicacion = "rosario";
+    // }
 
 
     if (req.session.nombre != undefined) {
