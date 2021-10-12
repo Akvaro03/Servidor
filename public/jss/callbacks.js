@@ -163,7 +163,7 @@ const arduino = async(req, res) => {
 
     // Datos.deleteMany({});
     if (temp) {
-        let hola = functions.dividirCadenaTemp(temp,"/");
+        let hola = await functions.dividirCadenaTemp(temp,"/");
         console.log(hola)
     }
 
