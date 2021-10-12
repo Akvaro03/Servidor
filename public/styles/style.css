@@ -361,8 +361,7 @@ span {
         opacity: 1;
         padding: 30px;
         transform: translateX(-500px);
-        transition: transform 0.5s ease-in-out;
-        z-index: 1;
+         z-index: 1;
         display: none;
     }
     .show {

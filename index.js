@@ -6,7 +6,6 @@ const mongoose = require(`mongoose`)
 const app = express();
 const bodyParser = require(`body-parser`);
 const uri = `mongodb+srv://alvaro:Wx6QdkklUQ5Bgtad@cluster0.v3juy.mongodb.net/usuarios`
-mongoose.set('useFindAndModify', false);
 const compression = require('compression');
 app.use(compression());
 
@@ -22,7 +21,6 @@ const port = process.env.PORT || 3000;
 
 mongoose.connect(uri, {
     useNewUrlParser: true,
-    useCreateIndex: true,
     useUnifiedTopology: true
 })
 
@@ -50,13 +48,57 @@ const functions = require("./public/jss/functions")
 
 app.get('/urlparam', async(req, res) => {
 
-    let { temp } = req.query;
+    let { temp,hum} = req.query;
     res.status(200).send("Funciono");
-    if (temp ) {
-        // await historial.deleteMany({});
-        functions.dividirCadena(temp,"/", "temp")
-        console.log("hola")
+    if (temp && hum) {
+        await historial.deleteMany({});
+        var temperatura = await functions.dividirCadena(temp,"/")
+        var humedad = await functions.dividirCadena(hum,"/")
+        console.log("temperatura es")
+        console.log(temperatura)
+        console.log("humedad es ")
+        console.log(humedad)
+
+        let date = new Date();
+        let hours = date.getHours();
+        let day = date.getDate();
+        let minutes = date.getMinutes();
+        
+        let Historial = await new historial({ temp: temperatura, day, hours, minutes, hum: humedad, day, hours, minutes});
+        await Historial.save();
+    } else{
+        if (temp) {
+            let temperatura = await functions.dividirCadena(temp,"/")
+            console.log("temperatura es")
+            console.log(temperatura)
+            
+            let date = new Date();
+            let hours = date.getHours();
+            let day = date.getDate();
+            let minutes = date.getMinutes();  
+            let Historial = await new historial({ temp: temperatura, day, hours, minutes});
+            await Historial.save();      
+        }
+        if (hum) {
+            let humedad = await functions.dividirCadena(hum,"/")
+            console.log("humedad es ")
+            console.log(humedad)
+
+            let date = new Date();
+            let hours = date.getHours();
+            let day = date.getDate();
+            let minutes = date.getMinutes();  
+
+            let Historial = await new historial({ hum: humedad, day, hours, minutes});
+            await Historial.save();      
+        }
+
     }
+    // if (hum) {
+    //     // await historial.deleteMany({});
+    //     await functions.dividirCadenaHum(hum,"/")
+    // }
+
 });
 
 
@@ -65,25 +107,12 @@ app.get('/hola', async(req, res) => {
 });
 
 app.post('/post', async function(req, res) {
-    res.send('POST request to the homepage')
     const { a, b } = req.body;
-    const z = req.body.a;
-    const y = req.body.b;
     console.log({ a, b })
-    console.log({ y, z })
     const datos = await new Datos({ a, b });
     await datos.save();
-    res.status(200).send(a);
+    res.status(200).send({a,b, c:"viva jesu loco"});
 
-    // try {
-    //     res.status(200);
-    //     if (a != undefined || b != undefined) {
-    //         const datos = await new Datos({ a, b });
-    //         await datos.save();
-    //     }
-    // } catch (e) {
-    //     throw new Error(`Error guardando datos: ${e}`)
-    // }
 })
 
 app.get('/cuenta', (req, res) => {
