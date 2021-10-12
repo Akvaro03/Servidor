@@ -138,9 +138,9 @@
                                                         <div class="estado ">
                                                             <p id="estado ">
                                                                 <% if (time > 25 && (hours >= 20 || hours <= 7) ) {%>
-                                                                    <p style="color: #E0FFFF; "> Caluroso</p>
+                                                                    <p style="color: #E0FFFF; ">Caluroso</p>
                                                                     <%} else if (time > 25 && hours < 20 && hours >= 7) {%>
-                                                                        <p> Caluroso</p>
+                                                                        <p>Caluroso</p>
                                                                         <%} else if (time > 15 && time < 25 && (hours >= 20 || hours <= 7) ) {%>
                                                                             <p style="color: #E0FFFF; ">Templado</p>
                                                                             <%} else if (time > 15 && time < 25 && hours < 20 && hours >= 7) {%>
@@ -160,17 +160,17 @@
                                                                             <% } %>
 
                                                                                 <% if (time > 25 && (hours >= 20 || hours <= 7)) {%>
-                                                                                    <span style="color: #E0FFFF; ">caluroso</span>
+                                                                                    <span style="color: #E0FFFF; " id="temperatura">caluroso</span>
                                                                                     <%} else if (time > 25 && hours < 20 && hours >= 7) {%>
-                                                                                        <span>caluroso</span>
+                                                                                        <span id="temperatura">caluroso</span>
                                                                                         <%} else if (time > 15 && time < 25 && (hours >= 20 || hours <= 7)) {%>
-                                                                                            <span style="color: #E0FFFF; ">templado</span>
+                                                                                            <span style="color: #E0FFFF;" id="temperatura">templado</span>
                                                                                             <%} else if (time > 15 && time < 25 && hours < 20 && hours >= 7) {%>
-                                                                                                <span>templado</span>
+                                                                                                <span id="temperatura">templado </span>
                                                                                                 <%} else if(time < 15 && (hours >= 20 || hours <= 7)){ %>
-                                                                                                    <span style="color: #E0FFFF; ">frio </span>
+                                                                                                    <span style="color: #E0FFFF; "id="temperatura">frio </span>
                                                                                                     <%} else if(time < 15){ %>
-                                                                                                        <span>frio</span>
+                                                                                                        <span id="temperatura">frio</span>
                                                                                                         <% } %> . La temperatura máxima será de
                                                                                                             <%= tempMax + "º "%>.</p>
                                                         </div>

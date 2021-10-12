@@ -311,6 +311,10 @@ span {
     margin-left: 75%;
 }
 
+#temperatura{
+    margin: 0;
+}
+
 @media (max-width:800px) {
     .form {
         height: 500px;
