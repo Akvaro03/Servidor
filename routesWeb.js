@@ -76,6 +76,11 @@ router.get(`/arduino`,  async(req, res) => {
     await callback.arduino(req, res);
 });
 
+router.get(`/dato`,  async(req, res) => {
+    await callback.recibirDatos(req, res);
+});
+
+
 router.post('/register', async function(req, res) {
     await callback.register(req, res);
 })

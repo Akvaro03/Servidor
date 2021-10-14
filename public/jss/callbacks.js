@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require(`body-parser`);
 
-
 const functions = require("./functions")
 
 const fs = require('fs');
@@ -163,7 +162,7 @@ const arduino = async(req, res) => {
 
     // Datos.deleteMany({});
     if (temp) {
-        let hola = await functions.dividirCadenaTemp(temp,"/");
+        let hola = await functions.dividirCadena(temp,"/");
         console.log(hola)
     }
 
@@ -263,6 +262,57 @@ const inicio = async(req, res) => {
     await res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: dataTempMax })
 };
 
+const recibirDatos = async(req, res) => {
+    let { temp,hum} = req.query;
+    if (temp && hum) {
+        await historial.deleteMany({});
+        var temperatura = await functions.dividirCadena(temp,"/")
+        var humedad = await functions.dividirCadena(hum,"/")
+        console.log("temperatura es")
+        console.log(temperatura)
+        console.log("humedad es ")
+        console.log(humedad)
+        res.status(200).send(temp + hum);
+
+        let date = new Date();
+        let hours = date.getHours();
+        let day = date.getDate();
+        let minutes = date.getMinutes();
+        
+        let Historial = await new historial({ temp: temperatura, day, hours, minutes, hum: humedad, day, hours, minutes});
+        await Historial.save();
+    } else{
+        if (temp) {
+            let temperatura = await functions.dividirCadena(temp,"/")
+            console.log("temperatura es")
+            console.log(temperatura)    
+            res.status(200).send(`Los datos son             "${temp}""`);
+
+            let date = new Date();
+            let hours = date.getHours();
+            let day = date.getDate();
+            let minutes = date.getMinutes();  
+            let Historial = await new historial({ temp: temperatura, day, hours, minutes});
+            await Historial.save();      
+        }
+        if (hum) {
+            let humedad = await functions.dividirCadena(hum,"/")
+            console.log("humedad es ")
+            console.log(humedad)
+
+            let date = new Date();
+            let hours = date.getHours();
+            let day = date.getDate();
+            let minutes = date.getMinutes();  
+
+            let Historial = await new historial({ hum: humedad, day, hours, minutes});
+            await Historial.save();      
+        }
+
+    }
+
+}
+
 const configuracion = async(req, res) => {
     const id = req.session.ip;
 
@@ -326,5 +376,6 @@ module.exports = {
     inicio: inicio,
     configuracion: configuracion,
     ubicacion: ubicacion,
-    contact: contact
+    contact: contact,
+    recibirDatos: recibirDatos
 };
