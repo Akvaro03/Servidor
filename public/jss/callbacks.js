@@ -160,7 +160,7 @@ const arduino = async(req, res) => {
     let day = date.getDate();
     let minutes = date.getMinutes()
 
-    // Datos.deleteMany({});
+    Datos.deleteMany({});
     if (temp) {
         let hola = await functions.dividirCadena(temp,"/");
         console.log(hola)
