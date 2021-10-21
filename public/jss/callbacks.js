@@ -149,6 +149,9 @@ const register = async(req, res) => {
 
 const arduino = async(req, res) => {
     let { ubicacion, frase, temp, hum } = req.query;
+    // await historial.deleteMany({})
+
+
     var nombre = "Crear cuenta";
     var dataTemp;
     var dataHumi;
@@ -160,7 +163,6 @@ const arduino = async(req, res) => {
     let day = date.getDate();
     let minutes = date.getMinutes()
 
-    Datos.deleteMany({});
     if (temp) {
         let hola = await functions.dividirCadena(temp,"/");
         console.log(hola)
@@ -265,7 +267,7 @@ const inicio = async(req, res) => {
 const recibirDatos = async(req, res) => {
     let { temp,hum} = req.query;
     if (temp && hum) {
-        await historial.deleteMany({});
+        // await historial.deleteMany({});
         var temperatura = await functions.dividirCadena(temp,"/")
         var humedad = await functions.dividirCadena(hum,"/")
         console.log("temperatura es")
