@@ -337,8 +337,6 @@ const ubicacion = async(req, res) => {
 const contact = async(req, res) => {
     const { email, asunto, message } = req.body;
 
-
-
     transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
@@ -346,9 +344,10 @@ const contact = async(req, res) => {
         secure: false,
         auth: {
             user: 'alvaroballarini2010@gmail.com',
-            pass: '141003@Ba'
+            pass: 'alvaro ballarini google'
         }
     });
+
     const mailOptions = {
         from: 'alvaroballarini2010@gmail.com',
         to: 'alvaroballarini2010@hotmail.com',
