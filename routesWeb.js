@@ -108,4 +108,9 @@ router.post('/contact', async(req, res) => {
     await callback.contact(req, res);
 });
 
+router.post('/intento', async(req, res) => {
+    await callback.contactPagina(req, res);
+});
+
+
 module.exports = router;
