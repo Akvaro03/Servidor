@@ -371,9 +371,6 @@ const contact = async(req, res) => {
 };
 
 const contactPagina = async(req, res) => {
-    import { SMTPClient } from 'emailjs';
-
-
     const client = new SMTPClient({
         user: 'alvaroballarini2010@gmail.com',
         password: 'alvaro ballarini google',
