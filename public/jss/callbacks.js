@@ -165,36 +165,16 @@ const arduino = async(req, res) => {
     let day = date.getDate();
     let minutes = date.getMinutes()
 
-    const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
-        // .then(user => { return user[0] })
-        // .then(user => { return user.temp })
-        console.log(datoAhora)
-        for (let index = 0; index < datoAhora.length; index++) {
-            console.log(datoAhora[index]);
-            
-        }
-        console.log(datoAhora[0]);
 
-    // if (datoAhora != undefined) {
-    //     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
-    //         .then(response => response.data)
-    //         .then(data => { return data.main })
-    //         .catch(error => { return new Error(error) });
-    //     dataTemp = datoAhora[0];
-    //     dataHumi = datoAhora[1];
-    //     dataTempMax = response.temp_max;
-    //     dataFeels = response.feels_like;
-    // } else if (datoAhora) {
-    //     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
-    //         .then(response => response.data)
-    //         .then(data => { return data.main })
-    //         .catch(error => { return new Error(error) });
-    //         dataTemp = datoAhora.temp;
-    //         dataHumi = datoAhora.hum;
-    //         dataTempMax = response.temp_max;
-    //     dataFeels = response.feels_like;
-    //     ubicacion = "rosario";
-    // }
+    //buscar los datos en base a la hora
+    const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
+        .then(user => { return user[0] })
+        // .then(user => { return user }) //obtener los datos
+        console.log(datoAhora.temp)
+
+            dataTemp = datoAhora.temp[0]; //obtener temperatura
+            console.log(dataTemp)
+            dataHumi = datoAhora.temp[1]; //obtener humedad
 
 
     if (req.session.nombre != undefined) {
@@ -207,11 +187,10 @@ const arduino = async(req, res) => {
     }
 
     console.log('temp es ' +  dataTemp)
-    console.log('humd es ' +  dataHumi)
     
     let direccion = "norte";
     ubicacion = "rosario";
-    await res.render("index.ejs", { time: dataTemp, ubicacion: "Rosario", nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: 15 })
+    await res.render("index.ejs", { time: dataTemp, ubicacion: "ubicacion", nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: "15" })
 };
 
 const inicio = async(req, res) => {
