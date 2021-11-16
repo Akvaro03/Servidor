@@ -209,6 +209,7 @@ const arduino = async(req, res) => {
     console.log('humd es ' +  dataHumi)
     
     let direccion = "norte";
+    ubicacion = "rosario";
     await res.render("index.ejs", { time: dataTemp, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: 15 })
 };
 
