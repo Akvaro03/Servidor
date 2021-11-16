@@ -328,10 +328,10 @@ const configuracion = async(req, res) => {
     res.redirect(`/`)
 };
 
-const ubicacion = async(req, res) => {
-    const { ubicacion } = req.body;
-    res.redirect(`/?ubicacion=${ubicacion}&elegida=yes`)
-};
+// const ubicacion = async(req, res) => {
+//     const { ubicacion } = req.body;
+//     res.redirect(`/?ubicacion=${ubicacion}&elegida=yes`)
+// };
 
 const contact = async(req, res) => {
     const { email, asunto, message } = req.body;
@@ -460,7 +460,7 @@ module.exports = {
     arduino: arduino,
     inicio: inicio,
     configuracion: configuracion,
-    ubicacion: ubicacion,
+    // ubicacion: ubicacion,
     contact: contact,
     recibirDatos: recibirDatos
 };
