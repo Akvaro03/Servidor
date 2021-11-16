@@ -166,8 +166,9 @@ const arduino = async(req, res) => {
     let minutes = date.getMinutes()
 
     const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
-        .then(user => { return user[0] })
-        .then(user => { return user.temp })
+        // .then(user => { return user[0] })
+        // .then(user => { return user.temp })
+        console.log(datoAhora)
         for (let index = 0; index < datoAhora.length; index++) {
             console.log(datoAhora[index]);
             
