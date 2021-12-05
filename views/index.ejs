@@ -49,6 +49,7 @@
                                                 <a href="/cuenta " class="class=" a d-none d-md-inline-block">Iniciar sesion</a>
                                                     <%} else { %>
                                                         <a href="/opciones" class="class=" a d-none d-md-inline-block "><%=nombre%></a>
+                                                        <a href="/arduino" class="class=" a d-none d-md-inline-block ">Mi clima</a>
                                                 <a href="/cerrarSesion " class="class=" a d-none d-md-inline-block">Cerrar sesion</a>
                                                         <% } %>
                                             </div>
@@ -137,13 +138,13 @@
                                                     <div class="estadoClima ">
                                                         <div class="estado ">
                                                             <p id="estado ">
-                                                                <% if (time > 25 && (hours >= 20 || hours <= 7) ) {%>
+                                                                <% if (time >= 25 && (hours >= 20 || hours <= 7) ) {%>
                                                                     <p style="color: #E0FFFF; ">Caluroso</p>
-                                                                    <%} else if (time > 25 && hours < 20 && hours >= 7) {%>
+                                                                    <%} else if (time >= 25 && hours < 20 && hours >= 7) {%>
                                                                         <p>Caluroso</p>
-                                                                        <%} else if (time > 15 && time < 25 && (hours >= 20 || hours <= 7) ) {%>
+                                                                        <%} else if (time >= 15 && time < 25 && (hours >= 20 || hours <= 7) ) {%>
                                                                             <p style="color: #E0FFFF; ">Templado</p>
-                                                                            <%} else if (time > 15 && time < 25 && hours < 20 && hours >= 7) {%>
+                                                                            <%} else if (time >= 15 && time < 25 && hours < 20 && hours >= 7) {%>
                                                                                 <p>Templado</p>
                                                                                 <%} else if(time < 15 && hours >= 20 || hours <= 7 ){ %>
                                                                                     <p style="color: #E0FFFF; "> Frio </p>

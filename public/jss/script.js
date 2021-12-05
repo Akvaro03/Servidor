@@ -1,5 +1,3 @@
-console.clear();
-
 const loginBtn = document.getElementById('login');
 const signupBtn = document.getElementById('signup');
 const form = document.getElementById('formReg');
@@ -27,3 +25,7 @@ signupBtn.addEventListener('click', (e) => {
         }
     });
 });
+
+
+
+

@@ -36,29 +36,12 @@ const isAuth = (req, res, next) => {
         res.redirect(`/cuenta`)
     }
 };
-const isAuth22 = (req, res, next) => {
-    const token = req.headers['authorization']
-    if (!token) {
-        return res.send({
-            ok: false,
-            message: 'Toket inválido'
-        })
+const isAuthArduino = (req, res, next) => {
+    if (req.session.isAuth) {
+        next();
+    } else {
+        res.redirect(`/cuenta`)
     }
-    console.log("hola")
-
-    jwt.verify(token, "contraseña", function(err, token) {
-        if (err) {
-            return res.send({
-                ok: false,
-                message: 'Toket inválido',
-                token: "token"
-            });
-        } else {
-            console.log(token);
-            console.log("hola")
-            next();
-        }
-    });
 };
 
 //motor vista
@@ -72,7 +55,7 @@ router.get(`/`, async(req, res) => {
     await callback.inicio(req, res);
 });
 
-router.get(`/arduino`,  async(req, res) => {
+router.get(`/arduino`,isAuthArduino,  async(req, res) => {
     await callback.arduino(req, res);
 });
 

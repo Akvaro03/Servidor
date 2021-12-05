@@ -294,23 +294,26 @@ const recibirDatos = async(req, res) => {
 }
 
 const configuracion = async(req, res) => {
+    
     const id = req.session.ip;
 
-    User.findOneAndUpdate({ _id: id }, req.body, function(err) {
+    req.session.idAr = req.body.idAr;
+
+    const update = {
+        ubicacion: req.body.ubicacion,
+        idAr: req.body.idAr 
+    };
+
+    User.findOneAndUpdate({ _id: id }, update, function(err) {
         if (err) {
             console.log(err)
         } else {
-            console.log(`Se logro`);
+            res.redirect(`/`)
         }
     })
 
-    res.redirect(`/`)
 };
 
-// const ubicacion = async(req, res) => {
-//     const { ubicacion } = req.body;
-//     res.redirect(`/?ubicacion=${ubicacion}&elegida=yes`)
-// };
 
 const contact = async(req, res) => {
     const { email, asunto, message } = req.body;
