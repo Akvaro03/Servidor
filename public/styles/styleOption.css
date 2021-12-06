@@ -627,7 +627,7 @@ a.ssolink {
     .form-structor {
         height: 100vh;
         width: 100%;
-        backdrop-filter: blur(0px);
+        backdrop-filter: blur(3px);
         /* border: 1px solid rgb(0, 0, 0); */
         /* transform: translate(50%,0%); */
     }
@@ -663,6 +663,10 @@ a.ssolink {
         height: 100vh;
         width: 100%;
         display: block;
-
     }
+
+    .noFunciona{
+        color: rgba(255, 255, 255, 0.925) ;
+    }
+    
 }
