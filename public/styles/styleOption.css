@@ -1,9 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 body {
     /* position: relative; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: "Fira Sans", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -11,7 +8,12 @@ body {
     background-repeat: no-repeat;
     background-image: url("/img/fondOption.jpg");
 }
+.nose{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+}
 .form-structor {
     border-radius: 15px;
     height: 550px;
@@ -626,7 +628,7 @@ a.ssolink {
         height: 100vh;
         width: 100%;
         backdrop-filter: blur(0px);
-        border: 1px solid rgb(0, 0, 0);
+        /* border: 1px solid rgb(0, 0, 0); */
         /* transform: translate(50%,0%); */
     }
 
@@ -660,6 +662,7 @@ a.ssolink {
     .nose{
         height: 100vh;
         width: 100%;
+        display: block;
 
     }
 }
