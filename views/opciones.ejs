@@ -13,60 +13,65 @@
 </head>
 
 <body>
-    <!-- partial:index.partial.html -->
     <div class="form-structor">
-        <form action="/configuracion" method="post" id="formReg">
-            <div class="signup">
-                <h2 class="form-title" id="signup">Configuracion</h2>
-                <div class="form-holder" >
+      <form action="/configuracion" method="post" id="formReg">
+          <div class="signup">
+              <h2 class="form-title" id="signup">Configuracion</h2>
+              <div class="form-holder" >
 
-                    <!--  -->
-                    <input type="text" name="ubicacion" id="input" class="input" placeholder="ubicacion">
-                    <div>
-                        <input type="checkbox" id="miElementoCheckbox" class="checkbox"> <span id="checkboxText">Tiene un Klimarios?</span> 
-                    </div>
-                    <div id="msg">
-                        <input type="text" class="input Arduino" placeholder="Numero del arduino" style="display: none;" name="idAr" id="Arduino" />
-                    </div>
-                    <!-- <input type="checkbox" id="miElementoCheckbox">Stay signed in for a week -->
+                  <!--  -->
+                  <input type="text" name="ubicacion" id="input" class="input" placeholder="ubicacion">
+                  <div>
+                      <input type="checkbox" id="miElementoCheckbox" class="checkbox"> <span id="checkboxText">Tiene un Klimarios?</span> 
+                  </div>
+                  <div id="msg">
+                      <input type="text" class="input Arduino" placeholder="Numero del arduino" style="display: none;" name="idAr" id="Arduino" />
+                  </div>
+                  <!-- <input type="checkbox" id="miElementoCheckbox">Stay signed in for a week -->
 
-                    <!-- <div id="msg"></div> -->
-                </div>
-                <Span class="noFunciona" id="noFunciona" style="display: none;">No te funciona tu codigo? Envianos un mensaje</Span>
-                <button class="submit-btn" type="submit">Configura</button>
-            </div>
-        </form>
-      
-  </div>
-  <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;" id="form">
-    <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-      <div class="formbg-outer">
-        <div class="formbg">
-          <div class="formbg-inner padding-horizontal--48">
-            <span class="padding-bottom--15">Estas teniendo problemas con tu codigo arduino?</span>
-            <form id="stripe-login">
-              <div class="field padding-bottom--24">
-                <label for="email">Tu corrreo</label>
-                <input type="email" name="email" id="email">
+                  <!-- <div id="msg"></div> -->
               </div>
-              <div class="field padding-bottom--24">
-                <div class="grid--50-50">
-                  <label for="password">Mensaje</label>
-                </div>
-                <input type="text" name="text" id="message">
-              </div>
-              <div class="botton-div">
-                <button onclick="sendmail()" type="button" id="botonenviar" class="button">ENVIAR</button>
-            </div>
-</form>
+              <Span class="noFunciona" id="noFunciona" style="display: none;">No te funciona tu codigo? Envianos un mensaje</Span>
+              <button class="submit-btn" type="submit">Configura</button>
           </div>
+      </form>
+    
+    </div>
+
+    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;" id="form">
+  <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+    <div class="formbg-outer">
+      <div class="formbg">
+        <div class="formbg-inner padding-horizontal--48">
+          <span class="padding-bottom--15">Estas teniendo problemas con tu codigo arduino?</span>
+          <form id="stripe-login">
+            <div class="field padding-bottom--24">
+              <label for="email">Tu corrreo</label>
+              <input type="email" name="email" id="email">
+            </div>
+            <div class="field padding-bottom--24">
+              <div class="grid--50-50">
+                <label for="password">Mensaje</label>
+              </div>
+              <input type="text" name="text" id="message">
+            </div>
+            <div class="botton-div">
+              <button onclick="sendmail()" type="button" id="botonenviar" class="button">ENVIAR</button>
+          </div>
+</form>
         </div>
       </div>
     </div>
   </div>
+    </div>
+
+
+
+
+
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 
-        <script>
+    <script>
 (function () {
     emailjs.init("user_jzR3ajQIIeAmGJaDHvzPU");
 })();
@@ -111,9 +116,8 @@ function sendmail() {
             // form.style.transform= "translateY(-600px)";
             // formReg.style.transform= "translate(50%,250px)";
 
-            </script>
+    </script>
 
-    </div>
     <!-- partial -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 

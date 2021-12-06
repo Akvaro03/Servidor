@@ -40,7 +40,7 @@ body {
 .form-structor .signup.slide-up .form-holder,
 .form-structor .signup.slide-up .submit-btn {
     opacity: 0;
-    visibility: hidden;
+    visibility: ;
 }
 
 .form-structor .signup.slide-up .form-title {
@@ -603,3 +603,30 @@ a.ssolink {
     transform: translateY(50px) !important;
 }
 
+@media (max-width:800px) {
+    html{
+        height: auto;
+    }
+    .form-holder{
+        border: 1px solid grey;
+    }
+    .form-structor {
+        backdrop-filter: blur(0px);
+    }
+
+    .form-structor .signup {
+        -webkit-transform: translate(-29%, -50%);
+        width: 251%;
+    }
+    .moverFormReg{
+        transform: translate(50%,250px)        !important;
+    }
+    
+    .moverForm{
+        transform: translate(-50px,50px) !important;
+    }
+    
+    #form{
+        transform: translate(-50px,-600px);
+    }
+}
