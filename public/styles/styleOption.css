@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 body {
-    position: relative;
+    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -616,7 +616,8 @@ a.ssolink {
 
 @media (max-width:800px) {
     html{
-        height: auto;
+        height: 100vh;
+        width: 100vw;
     }
     .form-holder{
         border: 1px solid grey;
@@ -655,5 +656,10 @@ a.ssolink {
 
     #formReg{
         /* transform: translate(1px) !important; */
+    }
+    .nose{
+        height: 100vh;
+        width: 100%;
+
     }
 }
