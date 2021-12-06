@@ -611,12 +611,21 @@ a.ssolink {
         border: 1px solid grey;
     }
     .form-structor {
+        height: 100vh;
+        width: 100%;
         backdrop-filter: blur(0px);
+        border: 1px solid rgb(0, 0, 0);
+        /* transform: translate(50%,0%); */
+    }
+
+    body {
+        display: block;
     }
 
     .form-structor .signup {
-        -webkit-transform: translate(-29%, -50%);
-        width: 251%;
+        position: static;
+        /* -webkit-transform: translate(-29%, -50%); */
+        /* width: 251%; */
     }
     .moverFormReg{
         transform: translate(50%,250px)        !important;
@@ -627,6 +636,6 @@ a.ssolink {
     }
     
     #form{
-        transform: translate(-50px,-600px);
+        transform: translate(0px,-1500px);
     }
 }
