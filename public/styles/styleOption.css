@@ -613,9 +613,20 @@ a.ssolink {
 }
 
 .moverForm{
-    transform: translateY(50px) !important;
+    transform: translateY(-20px) !important;
 }
-
+@media (min-width:800px) {
+    i{
+        padding-top: 30px;
+        padding-left: 30px;
+    }        
+    .padding-horizontal--48 {
+        padding: 48px;
+        padding-top: 15px;
+        padding-right: 75px;
+      }
+      
+}
 @media (max-width:800px) {
     html{
         height: 100vh;
@@ -664,9 +675,17 @@ a.ssolink {
         width: 100%;
         display: block;
     }
-
     .noFunciona{
         color: rgba(255, 255, 255, 0.925) ;
+    }
+    .padding-horizontal--48 {
+        padding-top: 40%;
+    }
+    i{
+        position: absolute;
+        top: 45px;
+        right: 20px;
+    
     }
     
 }

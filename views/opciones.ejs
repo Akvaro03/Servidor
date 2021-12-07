@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="./styles/styleOption.css">
 
 
-    
+    <script src="https://kit.fontawesome.com/f1749ebb6f.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -38,11 +39,13 @@
       </form>
     
     </div>
-
     <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;" id="form">
   <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
     <div class="formbg-outer">
+
       <div class="formbg">
+        <i class="fas fa-compress-arrows-alt fa-2x" id="cruz"></i>
+
         <div class="formbg-inner padding-horizontal--48">
           <span class="padding-bottom--15">Estas teniendo problemas con tu codigo arduino?</span>
           <form id="stripe-login">
@@ -99,6 +102,8 @@ function sendmail() {
             var mensaje = document.getElementById('noFunciona');
             var form = document.getElementById('form');  
             var formReg = document.getElementById('formReg');  
+            var cruz = document.getElementById('cruz');  
+
             
             miCheckbox.addEventListener('click', function() {
                 if(miCheckbox.checked) {
@@ -113,6 +118,12 @@ function sendmail() {
               formReg.classList.toggle("moverFormReg");
               form.classList.toggle("moverForm");
             });
+
+            cruz.addEventListener('click', function() {
+              formReg.classList.toggle("moverFormReg");
+              form.classList.toggle("moverForm");
+            });
+
             // form.style.transform= "translateY(20px)";
             // formReg.style.transform= "translate(10%,250px)";
 
