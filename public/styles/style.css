@@ -316,6 +316,10 @@ span {
 }
 
 @media (max-width:800px) {
+    .container44 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
     .form {
         height: 500px;
     }
