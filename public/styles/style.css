@@ -122,8 +122,8 @@ nav div {
     width: 90%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 11px;
 }
 
 .dibujo {
@@ -133,7 +133,7 @@ nav div {
 }
 
 .nombre {
-    margin: 0 8px 0 0;
+    margin: 10px 8px 4px 0;
     background: 0.9;
 }
 
@@ -161,9 +161,9 @@ nav div {
 
 .ubicacion {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 3;
     color: white;
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(50px);
     margin: 20px;
     margin-left: 0;
 }

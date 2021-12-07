@@ -173,9 +173,22 @@ const arduino = async(req, res) => {
         console.log(datoAhora.temp)
 
             dataTemp = datoAhora.temp[0]; //obtener temperatura
-            console.log(dataTemp)
-            dataHumi = datoAhora.temp[1]; //obtener humedad
+            // console.log(dataTemp)
 
+            dataHumi = datoAhora.temp[1]; //obtener humedad
+            // console.log(dataHumi)
+
+            dataPres  = datoAhora.temp[2]; //obtener Presion
+            // console.log(dataPres)
+
+            dataArray  = datoAhora.temp[3]; //obtener Array
+            // console.log(dataArray)
+
+            dataVelo = datoAhora.temp[4]; //obtener Velocidad
+            // console.log(dataVelo)
+
+            dataLiqui = datoAhora.temp[5]; //obtener Liquido
+            // console.log(dataLiqui)
 
     if (req.session.nombre != undefined) {
         nombre = req.session.nombre;
@@ -187,10 +200,15 @@ const arduino = async(req, res) => {
     }
 
     console.log('temp es ' +  dataTemp)
-    
+    console.log('humedad es ' +  dataHumi)
+    console.log('Presion es ' +  dataPres)
+    console.log('Array es ' +  dataArray)
+    console.log('Velocidad es ' +  dataVelo)
+    console.log('Liquido es ' +  dataLiqui)
+
     let direccion = "norte";
     ubicacion = "rosario";
-    await res.render("index.ejs", { time: dataTemp, ubicacion: "ubicacion", nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(), humedad: dataHumi, direccion: direccion, sensacion: dataFeels, tempMax: "15" })
+    await res.render("index.ejs", { time: dataTemp,humedad: dataHumi, direccion: dataArray, presion: dataPres, array: dataArray, velocidad: dataVelo, liquido: dataLiqui, ubicacion: "ubicacion", nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(),  sensacion: dataFeels, tempMax: "15" })
 };
 
 const inicio = async(req, res) => {
