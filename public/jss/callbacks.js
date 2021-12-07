@@ -208,7 +208,7 @@ const arduino = async(req, res) => {
 
     let direccion = "norte";
     ubicacion = "rosario";
-    await res.render("index.ejs", { time: dataTemp,humedad: dataHumi, direccion: dataArray, presion: dataPres, array: dataArray, velocidad: dataVelo, liquido: dataLiqui, ubicacion: "ubicacion", nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(),  sensacion: dataFeels, tempMax: "15" })
+    await res.render("arduino.ejs", { time: dataTemp,humedad: dataHumi, direccion: dataArray, presion: dataPres, array: dataArray, velocidad: dataVelo, liquido: dataLiqui, ubicacion: "ubicacion", nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(),  sensacion: dataFeels, tempMax: "15" })
 };
 
 const inicio = async(req, res) => {
