@@ -322,9 +322,13 @@ span {
     
     .form {
         height: 500px;
+        transform: translate(164px, -700px);
     }
     .contenedor {
         width: 183px;
+        position: absolute;
+        margin-left: 0px;
+        transform: translate(0px, -1000px);
     }
     .contenedor p,
     .contenedor i {
@@ -332,14 +336,14 @@ span {
         margin: 0px;
     }
     .displey {
-        transform: translateY(60px);
+        transform: translate(164px,60px);
     }
     #x {
         padding-top: 2px;
         padding-bottom: 0px;
     }
     .ver {
-        transform: translate(-70px, -500px);
+        transform: translate(0px, -600px);    
     }
     .contenedor2 {
         display: flex;
@@ -382,5 +386,10 @@ span {
     }
     .container22 {
         padding-top: 15px;
+    }
+
+    #formulario{
+        left: 0% !important;
+        top: 0px !important;
     }
 }
