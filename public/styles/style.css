@@ -383,6 +383,7 @@ span {
     .show {
         transform: translateX(-20px);
         display: block;
+        transition: transform 0.5s Ease-out;
     }
     #formReg {
         grid-row-start: 1;
