@@ -102,12 +102,12 @@
                                                 <div class="contact" style="position: absolute; left: 50%; top:100px" id="formulario">
                                                     <form class="form" style="position: relative; left: -50%;" id="formdata">
                                                         <i class="fas fa-times" id="x-contact"></i>
-                                                        <h2 class=" h2 ">CONTACT US</h2>
-                                                        <p type="Email: " class="p "><input id="email" name="email" class="input" type="email" placeholder="Let us know how to contact you back.. "></input>
+                                                        <h2 class=" h2 ">Contactanos</h2>
+                                                        <p type="Email: " class="p "><input id="email" name="email" class="input" type="email" placeholder="tucorreo@gmai.com"></input>
                                                         </p>
-                                                        <p type="Asunto: " class="p "><input id="asunto" name="asunto" class="input" type="text" placeholder="What would you like to tell us.. "></input>
+                                                        <p type="Asunto: " class="p "><input id="asunto" name="asunto" class="input" type="text" placeholder="Que te gustaria decirnos"></input>
                                                         </p>
-                                                        <p type="Mensaje: " class="p "><input id="mensaje" name="message" class="input" type="text" placeholder="What would you like to tell us.. "></input>
+                                                        <p type="Mensaje: " class="p "><input id="mensaje" name="message" class="input" type="text" placeholder="Que te gustaria decirnos"></input>
                                                         </p>
                                                         <input type="button" id="botonenviar" class="button" value="Enviar">
                                                     </form>
@@ -163,19 +163,20 @@
                                                                             <% } %>
 
                                                                                 <% if (time > 25 && (hours >= 20 || hours <= 7)) {%>
-                                                                                    <span style="color: #E0FFFF; " id="temperatura">caluroso</span>
+                                                                                    <span style="color: #E0FFFF; " id="temperatura">caluroso.</span>
                                                                                     <%} else if (time > 25 && hours < 20 && hours >= 7) {%>
-                                                                                        <span id="temperatura">caluroso</span>
+                                                                                        <span id="temperatura">caluroso.</span>
                                                                                         <%} else if (time > 15 && time < 25 && (hours >= 20 || hours <= 7)) {%>
-                                                                                            <span style="color: #E0FFFF;" id="temperatura">templado</span>
+                                                                                            <span style="color: #E0FFFF;" id="temperatura">templado.</span>
                                                                                             <%} else if (time > 15 && time < 25 && hours < 20 && hours >= 7) {%>
-                                                                                                <span id="temperatura">templado </span>
+                                                                                                <span id="temperatura">templado.</span>
                                                                                                 <%} else if(time < 15 && (hours >= 20 || hours <= 7)){ %>
-                                                                                                    <span style="color: #E0FFFF; "id="temperatura">frio </span>
+                                                                                                    <span style="color: #E0FFFF; "id="temperatura">frio.</span>
                                                                                                     <%} else if(time < 15){ %>
-                                                                                                        <span id="temperatura">frio</span>
-                                                                                                        <% } %> . La temperatura máxima será de
-                                                                                                            <%= tempMax + "º "%>.</p>
+                                                                                                        <span id="temperatura">frio.</span>
+                                                                                                        <% } %>
+                                                                                                        La temperatura máxima será de
+                                                                                                            <%= tempMax + "º"%>.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,11 +273,11 @@
                                                         </svg>
                                                     </span>
                                                                                                 <% if (hours >= 20 || hours <= 7) {%>
-                                                                                                    <p class="nombreHumedad " style="color: #E0FFFF; ">Sensacion termica
+                                                                                                    <p class="nombreHumedad " style="color: #E0FFFF; ">Sensación térmica
                                                                                                         <%= sensacion + "º " %>
                                                                                                     </p>
                                                                                                     <%} else {%>
-                                                                                                        <p class="nombreHumedad ">Sensacion termica
+                                                                                                        <p class="nombreHumedad ">Sensación térmica
                                                                                                             <%= sensacion + "º "%>
                                                                                                         </p>
                                                                                                         <% } %>

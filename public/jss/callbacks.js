@@ -153,7 +153,7 @@ const register = async(req, res) => {
 const arduino = async(req, res) => {
     // await historial.deleteMany({})
 
-
+    var ubicacion = "Configure su ubicacion";
     var nombre = "Crear cuenta";
     var dataTemp;
     var dataHumi;
@@ -196,7 +196,10 @@ const arduino = async(req, res) => {
     if (req.session.isAuth != undefined) {
         const user = await User.find({ username: nombre })
             .then(user => { return user[0] })
-        ubicacion = user.ubicacion;
+        if (user.ubicacion) {
+            console.log(user.ubicacion)
+            ubicacion = user.ubicacion;
+        }
     }
 
     console.log('temp es ' +  dataTemp)
@@ -207,8 +210,28 @@ const arduino = async(req, res) => {
     console.log('Liquido es ' +  dataLiqui)
 
     let direccion = "norte";
-    ubicacion = "rosario";
-    await res.render("arduino.ejs", { time: dataTemp,humedad: dataHumi, direccion: dataArray, presion: dataPres, array: dataArray, velocidad: dataVelo, liquido: dataLiqui, ubicacion: "ubicacion", nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(),  sensacion: dataFeels, tempMax: "15" })
+    // ubicacion = "rosario";
+
+    if (dataArray == "E") {
+        dataArray = "este"
+    } else if (dataArray == "N"){
+        dataArray = "Norte"
+    } else if (dataArray == "W") {
+        dataArray = "Oeste"
+    } else if (dataArray == "S"){
+        dataArray = "Sur";
+    } else if (dataArray == "NE"){
+        dataArray = "Noreste";
+    } else if (dataArray == "NW"){   
+        dataArray = "noroeste";
+    } else if (dataArray == "SE"){
+        dataArray = "sureste";
+    } else if (dataArray == "SW"){
+        dataArray = "suroeste";
+    }
+
+    console.log(ubicacion)
+    await res.render("arduino.ejs", { time: dataTemp,humedad: dataHumi, direccion: dataArray, presion: dataPres, array: dataArray, velocidad: dataVelo, liquido: dataLiqui, ubicacion: ubicacion, nombre: nombre, hours: date.getHours(), minutes: date.getMinutes(),  sensacion: dataFeels, tempMax: "15" })
 };
 
 const inicio = async(req, res) => {
@@ -217,13 +240,14 @@ const inicio = async(req, res) => {
     await datos.save();
 
     let { ubicacion } = req.query;
+    console.log(ubicacion)
     var nombre = "Crear cuenta";
     var dataTemp;
     var dataHumi;
     var dataTempMax;
     var dataFeels;
 
-    if (ubicacion != undefined) {
+    if (ubicacion) {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${ubicacion}&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
             .then(response => response.data)
             .then(data => { return data.main })
@@ -232,6 +256,7 @@ const inicio = async(req, res) => {
         dataHumi = response.humidity;
         dataTempMax = response.temp_max;
         dataFeels = response.feels_like;
+        console.log(ubicacion)
     } else {
         const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=rosario&units=metric&appid=5a402f7379a9896b68f900a88b9c683a`)
             .then(response => response.data)
@@ -241,7 +266,7 @@ const inicio = async(req, res) => {
         dataHumi = response.humidity;
         dataTempMax = response.temp_max;
         dataFeels = response.feels_like;
-        ubicacion = "rosario";
+        ubicacion = "Rosario";
     }
 
 
@@ -251,9 +276,10 @@ const inicio = async(req, res) => {
     if (req.session.isAuth != undefined) {
         const user = await User.find({ username: nombre })
             .then(user => { return user[0] })
-        ubicacion = user.ubicacion;
+        // ubicacion = user.ubicacion;
     }
 
+    console.log(ubicacion)
 
     let date = new Date()
     let direccion = "norte";
@@ -449,7 +475,10 @@ const contactPagina = async(req, res) => {
 // main().catch(console.error);
 };
 
-
+const ubicacion = async(req, res) => {
+    const { ubicacion } = req.body;
+    res.redirect(`/?ubicacion=${ubicacion}&elegida=yes`)
+};
 module.exports = {
     contactPagina: contactPagina,
     opciones: opciones,
@@ -460,7 +489,7 @@ module.exports = {
     arduino: arduino,
     inicio: inicio,
     configuracion: configuracion,
-    // ubicacion: ubicacion,
+    ubicacion: ubicacion,
     contact: contact,
     recibirDatos: recibirDatos
 };
