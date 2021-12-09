@@ -164,13 +164,30 @@ const arduino = async(req, res) => {
     let hours = date.getHours();
     let day = date.getDate();
     let minutes = date.getMinutes()
+    let second = date.getSeconds();
 
+    var prueba = 1;
+    console.log(second)
+    console.log(second)
+    console.log(second)
+
+    console.log(second)
+    console.log(second)
+    console.log(second)
+    console.log(second)
+    console.log(second)
+    console.log(second)
+    console.log(second)
+    console.log(second)
+    console.log(second)
+    console.log(second)
 
     //buscar los datos en base a la hora
-    const datoAhora = await historial.find({ minutes: minutes, hours:hours, day:day})
+    const datoAhora = await historial.find({ second: second, minutes: minutes, hours:hours, day:day})
         .then(user => { return user[0] })
-        // .then(user => { return user }) //obtener los datos
-        console.log(datoAhora.temp)
+        if(datoAhora){
+            console.log(datoAhora)
+            console.log(datoAhora.temp)
 
             dataTemp = datoAhora.temp[0]; //obtener temperatura
             // console.log(dataTemp)
@@ -195,6 +212,59 @@ const arduino = async(req, res) => {
                 dataLiqui = 0;
             }
             // console.log(dataLiqui)
+        } else if( prueba == 1) {
+            console.log("prueba 1")
+            second= second - 1; // second
+            const datoAhora = await historial.find({ second: second, minutes: minutes, hours:hours, day:day})
+            .then(user => { return user[0] })
+            if(user){ console.log(user) } 
+    
+        } else if( prueba == 1) {
+            console.log("prueba 1")
+
+            second= second - 1; // second
+            const datoAhora = await historial.find({ second: second, minutes: minutes, hours:hours, day:day})
+            .then(user => { return user[0] })
+            if(user){ console.log(user) } 
+        } else if( prueba == 1) {
+            console.log("prueba 1")
+
+            second= second - 1; // second
+            const datoAhora = await historial.find({ second: second, minutes: minutes, hours:hours, day:day})
+            .then(user => { return user[0] })
+            if(user){ console.log(user) } 
+        } else if( prueba == 1) {
+            console.log("prueba 1")
+
+            second= second - 1; // second
+            const datoAhora = await historial.find({ second: second, minutes: minutes, hours:hours, day:day})
+            .then(user => { return user[0] })
+            if(user){ console.log(user) } 
+        } else if( prueba == 1) {
+            console.log("prueba 1")
+
+            second= second - 1; // second
+            const datoAhora = await historial.find({ second: second, minutes: minutes, hours:hours, day:day})
+            .then(user => { return user[0] })
+            if(user){ console.log(user) } 
+        } else if( prueba == 1) {
+            console.log("prueba 1")
+
+            second= second - 1; // second
+            const datoAhora = await historial.find({ second: second, minutes: minutes, hours:hours, day:day})
+            .then(user => { return user[0] })
+            if(user){ console.log(user) } 
+        } else if( prueba == 1) {
+            console.log("prueba 1")
+
+            second= second - 1; // second
+            const datoAhora = await historial.find({ second: second, minutes: minutes, hours:hours, day:day})
+            .then(user => { return user[0] })
+            if(user){ console.log(user) } 
+        }
+
+
+        // .then(user => { return user }) //obtener los datos
 
     if (req.session.nombre != undefined) {
         nombre = req.session.nombre;
@@ -308,8 +378,9 @@ const recibirDatos = async(req, res) => {
         let hours = date.getHours();
         let day = date.getDate();
         let minutes = date.getMinutes();
+        let second = date.getSeconds();
         
-        let Historial = await new historial({ temp: temperatura, day, hours, minutes, hum: humedad, day, hours, minutes});
+        let Historial = await new historial({ temp: temperatura, day, hours, minutes,second, hum: humedad, day, hours, minutes});
         await Historial.save();
     } else{
         if (temp) {
@@ -322,7 +393,8 @@ const recibirDatos = async(req, res) => {
             let hours = date.getHours();
             let day = date.getDate();
             let minutes = date.getMinutes();  
-            let Historial = await new historial({ temp: temperatura, day, hours, minutes});
+            let second = date.getSeconds();
+            let Historial = await new historial({ temp: temperatura, day, hours, minutes,second});
             await Historial.save();      
         }
         if (hum) {
