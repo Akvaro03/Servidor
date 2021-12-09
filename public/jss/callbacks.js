@@ -178,14 +178,15 @@ const arduino = async(req, res) => {
             dataHumi = datoAhora.temp[1]; //obtener humedad
             // console.log(dataHumi)
 
-            var hola  = datoAhora.temp[2]; //obtener Presion<   
-            dataPres = Math.trunc(hola)
+            var PresionAtmosferica  = datoAhora.temp[2]; //obtener Presion<   
+            dataPres = Math.trunc(PresionAtmosferica)
             // console.log(dataPres)
 
             dataArray  = datoAhora.temp[3]; //obtener Array
             // console.log(dataArray)
 
-            dataVelo = datoAhora.temp[4]; //obtener Velocidad
+            var velocidadDelViento = datoAhora.temp[4]; //obtener Velocidad
+            dataVelo = Math.trunc(velocidadDelViento)
             // console.log(dataVelo)
 
             dataLiqui = datoAhora.temp[5]; //obtener Liquido
