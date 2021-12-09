@@ -188,6 +188,10 @@ const arduino = async(req, res) => {
             // console.log(dataVelo)
 
             dataLiqui = datoAhora.temp[5]; //obtener Liquido
+            console.log(dataLiqui)
+            if (dataLiqui < 0) {
+                dataLiqui = 0;
+            }
             // console.log(dataLiqui)
 
     if (req.session.nombre != undefined) {
