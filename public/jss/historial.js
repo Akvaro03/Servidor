@@ -7,7 +7,7 @@ const HISTORIA = new mongoose.Schema({
     day: { type: Number},
     hours: { type: Number},
     minutes: { type: Number},
-    seconds: { type: Number}
+    second: { type: Number}
 });
 
 module.exports = mongoose.model(`HISTORIA`, HISTORIA);
