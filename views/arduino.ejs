@@ -40,20 +40,20 @@
                                         </div>
                                         <%}%>
 
-                                            <div id="nav" class="container d-flex flex-column justify-content-between nav-menu flex-md-row">
-                                                <a id="icon" href="#"><i class="fas fa-cloud-sun fa-3x"></i></a>
-                                                <a href="https://klimarios.herokuapp.com/" class="class=" a d-none d-md-inline-block ">Klimarios</a>
-                                                <a class="btnContacto " a d-none d-md-inline-block" href="https://klimarios.herokuapp.com/">Contacto</a>
-                                                <%if (nombre=="Crear cuenta") {%>
-                                                    <a href="/cuenta" class="class=" a d-none d-md-inline-block ">Registrarse</a>
-                                                <a href="/cuenta " class="class=" a d-none d-md-inline-block">Iniciar sesion</a>
-                                                    <%} else { %>
-                                                        <a href="/opciones" class="class=" a d-none d-md-inline-block "><%=nombre%></a>
-                                                        <a href="/arduino" class="class=" a d-none d-md-inline-block ">Mi clima</a>
-                                                <a href="/cerrarSesion " class="class=" a d-none d-md-inline-block">Cerrar sesion</a>
-                                                        <% } %>
-                                            </div>
-                            </nav>
+                                        <div id="nav" class="container d-flex flex-column justify-content-between nav-menu flex-md-row">
+                                            <a id="icon" href="#" href="https://klimarios.herokuapp.com"><i class="fas fa-cloud-sun fa-3x"></i></a>
+                                            <a href="" class="class=" a d-none d-md-inline-block " href="https://klimarios.herokuapp.com">Klimarios</a>
+                                            <a class="btnContacto " a d-none d-md-inline-block">Contacto</a>
+                                            <%if (nombre=="Crear cuenta") {%>
+                                                <a href="/cuenta" class="class=" a d-none d-md-inline-block ">Registrarse</a>
+                                            <a href="/cuenta " class="class=" a d-none d-md-inline-block">Iniciar sesion</a>
+                                                <%} else { %>
+                                                    <a href="/opciones" class="class=" a d-none d-md-inline-block "><%=nombre%></a>
+                                                    <a href="/arduino" class="class=" a d-none d-md-inline-block ">Mi clima</a>
+                                            <a href="/cerrarSesion " class="class=" a d-none d-md-inline-block">Cerrar sesion</a>
+                                                    <% } %>
+                                        </div>
+                        </nav>
 
                             <% if (hours >= 20 || hours <= 7 ) { %>
 
